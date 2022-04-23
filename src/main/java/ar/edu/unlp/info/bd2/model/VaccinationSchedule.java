@@ -13,7 +13,7 @@ public class VaccinationSchedule {
     @GeneratedValue
     private long id;
 
-    @ManyToMany(mappedBy = "vaccine_schedulers")
+    @ManyToMany(mappedBy = "vaccination_schedule")
     private Collection<Vaccine> vaccines;
 
     public Collection<Vaccine> getVaccines() {

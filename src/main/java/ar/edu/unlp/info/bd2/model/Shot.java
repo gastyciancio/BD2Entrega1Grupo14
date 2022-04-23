@@ -10,7 +10,7 @@ public class Shot {
     @GeneratedValue
     private long id;
 
-    @OneToOne
+    @ManyToOne
     private Patient patient;
 
     @OneToOne()

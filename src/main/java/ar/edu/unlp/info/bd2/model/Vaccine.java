@@ -14,10 +14,10 @@ public class Vaccine {
 
         @ManyToMany
         @JoinTable(
-                name = "vaccine_vaccineshceduler",
+                name = "vaccine_vaccination_schedule",
                 joinColumns = @JoinColumn(name = "vaccine_id"),
-                inverseJoinColumns = @JoinColumn(name = "vacinnescheduluder_id"))
-        private Collection<VaccineScheduler> vaccine_schedulers;
+                inverseJoinColumns = @JoinColumn(name = "vaccination_schedule_id"))
+        private Collection<VaccinationSchedule> vaccination_schedule;
 
 
         public long getId() {

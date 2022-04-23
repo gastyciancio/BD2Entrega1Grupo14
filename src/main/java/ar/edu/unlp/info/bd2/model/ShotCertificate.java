@@ -12,7 +12,7 @@ public class ShotCertificate {
 
     private Date date;
 
-    private int serie;
+    private int serial_number;
 
     public int getSerialNumber() {
         return serial_number;

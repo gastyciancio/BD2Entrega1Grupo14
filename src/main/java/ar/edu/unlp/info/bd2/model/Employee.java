@@ -13,12 +13,9 @@ public class Employee {
     @GeneratedValue
     private long id;
 
-    private String name;
+    private String fullname;
 
-    private int dni;
-
-    @ManyToMany(mappedBy = "employees")
-    private Collection<Centre> centres;
+    private String dni;
 
     public String getFullName() {
         return fullname;

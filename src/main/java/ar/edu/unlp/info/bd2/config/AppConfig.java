@@ -10,7 +10,7 @@ public class AppConfig {
     @Bean
     public VaxService createService() {
         VaxRepository repository = this.createRepository();
-        return new VaxServiceImpl(repository);
+        return repository;
     }
 
     @Bean
