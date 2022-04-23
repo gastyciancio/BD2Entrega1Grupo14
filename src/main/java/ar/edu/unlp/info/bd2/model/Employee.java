@@ -20,5 +20,12 @@ public class Employee {
     @ManyToMany(mappedBy = "employees")
     private Collection<Centre> centres;
 
+    public String getFullName() {
+        return fullname;
+    }
+
+    public String getDni() {
+        return dni;
+    }
 
 }

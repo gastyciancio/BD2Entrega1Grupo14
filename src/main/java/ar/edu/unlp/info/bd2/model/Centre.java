@@ -14,7 +14,7 @@ public class Centre {
 
     @ManyToMany
     @JoinTable(
-            name = "centre_employee",
+            name = "centre_support_staffs",
             joinColumns = @JoinColumn(name = "centre_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Collection<Employee> employees;

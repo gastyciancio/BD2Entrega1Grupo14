@@ -14,5 +14,7 @@ public class ShotCertificate {
 
     private int serie;
 
-
+    public int getSerialNumber() {
+        return serial_number;
+    }
 }

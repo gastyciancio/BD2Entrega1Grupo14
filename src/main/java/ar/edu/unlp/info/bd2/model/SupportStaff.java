@@ -6,13 +6,15 @@ import javax.persistence.Id;
 
 @Entity
 public class SupportStaff extends Employee{
-
     @Id
     @GeneratedValue
     private long id;
 
     private String area;
 
+    public String getArea() {
+        return area;
+    }
 
 
 

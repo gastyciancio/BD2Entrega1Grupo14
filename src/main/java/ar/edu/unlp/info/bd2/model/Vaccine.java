@@ -20,4 +20,11 @@ public class Vaccine {
         private Collection<VaccineScheduler> vaccine_schedulers;
 
 
+        public long getId() {
+                return id;
+        }
+
+        public String getName() {
+                return name;
+        }
 }

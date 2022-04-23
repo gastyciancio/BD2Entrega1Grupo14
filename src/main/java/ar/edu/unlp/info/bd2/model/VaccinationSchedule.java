@@ -7,7 +7,7 @@ import javax.persistence.ManyToMany;
 import java.util.Collection;
 
 @Entity
-public class VaccineScheduler {
+public class VaccinationSchedule {
 
     @Id
     @GeneratedValue
@@ -16,4 +16,11 @@ public class VaccineScheduler {
     @ManyToMany(mappedBy = "vaccine_schedulers")
     private Collection<Vaccine> vaccines;
 
+    public Collection<Vaccine> getVaccines() {
+        return vaccines;
+    }
+
+    public long getId() {
+        return id;
+    }
 }
