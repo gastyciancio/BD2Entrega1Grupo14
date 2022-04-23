@@ -10,8 +10,11 @@ public class Nurse extends Employee{
     @Id
     @GeneratedValue
     private long id;
+
     private String dni;
+
     private String fullname;
+
     private Integer experience;
 
 }

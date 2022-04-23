@@ -1,9 +1,6 @@
 package ar.edu.unlp.info.bd2.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
@@ -15,7 +12,12 @@ public class Vaccine {
 
         private String name;
 
-        @OneToMany(mappedBy = "vaccine")
-        private Collection<Shot> shots;
+        @ManyToMany
+        @JoinTable(
+                name = "vaccine_vaccineshceduler",
+                joinColumns = @JoinColumn(name = "vaccine_id"),
+                inverseJoinColumns = @JoinColumn(name = "vacinnescheduluder_id"))
+        private Collection<VaccineScheduler> vaccine_schedulers;
+
 
 }
