@@ -57,6 +57,8 @@ public class VaxServiceTestCase {
     	assertEquals("Constraint Violation",ex.getMessage());
     }
 
+	/**
+
 	@Test
 	public void testCreateVaccine() throws VaxException{
 		Vaccine sp = this.service.createVaccine("Sinopharm");
@@ -158,5 +160,6 @@ public class VaxServiceTestCase {
 		}
 
 	}
+	**/
 
 }

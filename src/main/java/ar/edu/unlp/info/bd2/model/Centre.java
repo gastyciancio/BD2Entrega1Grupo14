@@ -19,6 +19,13 @@ public class Centre {
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Collection<Employee> employees;
 
+    public Centre() {
+    }
+
+    public Centre(String name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
@@ -34,4 +41,5 @@ public class Centre {
     public void addStaff(Employee staff){
         this.employees.add(staff);
     }
+
 }

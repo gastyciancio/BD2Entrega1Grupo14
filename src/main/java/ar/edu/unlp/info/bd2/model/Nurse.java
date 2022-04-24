@@ -13,13 +13,14 @@ public class Nurse extends Employee{
     @GeneratedValue
     private long id;
 
-    private String dni;
-
-    private String fullname;
-
     private Integer experience;
 
-    public String getFullName() {
-        return fullname;
+    public Nurse(String fullname, String dni, Integer experience) {
+        super(fullname, dni);
+        this.experience = experience;
+    }
+
+    public Nurse() {
+
     }
 }

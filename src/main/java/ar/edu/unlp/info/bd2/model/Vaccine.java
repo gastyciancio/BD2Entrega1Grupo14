@@ -19,6 +19,12 @@ public class Vaccine {
                 inverseJoinColumns = @JoinColumn(name = "vaccination_schedule_id"))
         private Collection<VaccinationSchedule> vaccination_schedule;
 
+        public Vaccine() {
+        }
+
+        public Vaccine(String name) {
+                this.name = name;
+        }
 
         public long getId() {
                 return id;

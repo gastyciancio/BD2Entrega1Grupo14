@@ -11,6 +11,8 @@ public class Patient {
     @GeneratedValue
     private long id;
 
+    private String email;
+
     private String password;
 
     private String fullname;
@@ -20,6 +22,15 @@ public class Patient {
     @OneToMany(mappedBy = "patient")
     private Collection<Shot> shots;
 
+    public Patient() {
+    }
+
+    public Patient(String email, String fullname, String password, Date dayOfBirth) {
+        this.email = email;
+        this.fullname = fullname;
+        this.password = password;
+        this.dayOfBirth = dayOfBirth;
+    }
 
     public String getPassword() {
         return password;
@@ -40,5 +51,7 @@ public class Patient {
     public Collection<Shot> getShots() {
         return shots;
     }
+
+
 }
 

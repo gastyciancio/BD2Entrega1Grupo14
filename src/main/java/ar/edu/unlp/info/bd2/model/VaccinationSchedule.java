@@ -18,6 +18,9 @@ public class VaccinationSchedule {
     @ManyToMany(mappedBy = "vaccination_schedule")
     private List<Vaccine> vaccines;
 
+    public VaccinationSchedule() {
+    }
+
     public List<Vaccine> getVaccines() {
         return vaccines;
     }
@@ -29,4 +32,5 @@ public class VaccinationSchedule {
     public void addVaccine(Vaccine v){
         this.vaccines.add(v);
     }
+
 }

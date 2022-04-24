@@ -14,10 +14,17 @@ public class SupportStaff extends Employee{
 
     private String area;
 
+    public SupportStaff(){
+
+    }
+
+    public SupportStaff(String fullname, String dni, String area) {
+        super(fullname, dni);
+        this.area = area;
+    }
+
     public String getArea() {
         return area;
     }
-
-
 
 }

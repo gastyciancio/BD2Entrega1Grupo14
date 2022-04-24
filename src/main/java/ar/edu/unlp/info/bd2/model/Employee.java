@@ -20,6 +20,14 @@ public class Employee {
     @ManyToMany(mappedBy = "employees")
     private Collection<Centre> centres;
 
+    public Employee() {
+    }
+
+    public Employee(String fullname, String dni) {
+        this.fullname = fullname;
+        this.dni = dni;
+    }
+
     public String getFullName() {
         return fullname;
     }
@@ -31,5 +39,6 @@ public class Employee {
     public Collection<Centre> getCentres() {
         return centres;
     }
+
 
 }

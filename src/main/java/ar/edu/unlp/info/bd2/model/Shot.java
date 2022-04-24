@@ -27,6 +27,18 @@ public class Shot {
     @OneToOne(cascade = CascadeType.ALL)
     private ShotCertificate shotCertificate;
 
+    public Shot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) {
+        this.patient = patient;
+        this.vaccine = vaccine;
+        this.date = date;
+        this.centre = centre;
+        this.nurse = nurse;
+
+    }
+
+    public Shot() {
+    }
+
     public long getId() {
         return id;
     }
@@ -50,4 +62,5 @@ public class Shot {
     public ShotCertificate getShotCertificate() {
         return shotCertificate;
     }
+
 }
