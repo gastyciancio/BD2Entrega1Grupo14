@@ -52,6 +52,8 @@ public class Patient {
         return shots;
     }
 
-
+    public String getEmail() {
+        return email;
+    }
 }
 

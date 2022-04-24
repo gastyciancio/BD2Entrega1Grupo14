@@ -32,7 +32,7 @@ public class VaxServiceImpl implements VaxService{
             return newPatient;
         }
         catch (Exception e) {
-            throw new VaxException("error creando paciente");
+            throw new VaxException(e.getMessage());
         }
     };
 
