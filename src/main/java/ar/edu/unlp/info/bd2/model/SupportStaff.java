@@ -18,11 +18,6 @@ public class SupportStaff extends Employee{
         return area;
     }
 
-    @ManyToMany(mappedBy = "support_staffs")
-    private Collection<Centre> centres;
 
-    public Collection<Centre> getCentres() {
-        return centres;
-    }
 
 }

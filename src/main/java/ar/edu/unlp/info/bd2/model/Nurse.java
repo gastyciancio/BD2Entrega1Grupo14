@@ -19,13 +19,7 @@ public class Nurse extends Employee{
 
     private Integer experience;
 
-    @ManyToMany(mappedBy = "nurses")
-    private Collection<Centre> centres;
-
     public String getFullName() {
         return fullname;
-
-    } public Collection<Centre> getCentres() {
-        return centres;
     }
 }

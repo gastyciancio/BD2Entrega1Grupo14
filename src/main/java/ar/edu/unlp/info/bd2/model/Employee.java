@@ -17,12 +17,19 @@ public class Employee {
 
     private String dni;
 
+    @ManyToMany(mappedBy = "employees")
+    private Collection<Centre> centres;
+
     public String getFullName() {
         return fullname;
     }
 
     public String getDni() {
         return dni;
+    }
+
+    public Collection<Centre> getCentres() {
+        return centres;
     }
 
 }

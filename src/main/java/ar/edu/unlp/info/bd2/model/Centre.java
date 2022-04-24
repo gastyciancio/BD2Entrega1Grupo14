@@ -14,17 +14,10 @@ public class Centre {
 
     @ManyToMany
     @JoinTable(
-            name = "centre_support_staffs",
+            name = "centre_employee",
             joinColumns = @JoinColumn(name = "centre_id"),
-            inverseJoinColumns = @JoinColumn(name = "support_staffs_id"))
-    private Collection<SupportStaff> support_staffs;
-
-    @ManyToMany
-    @JoinTable(
-            name = "centre_nurses",
-            joinColumns = @JoinColumn(name = "centre_id"),
-            inverseJoinColumns = @JoinColumn(name = "nurses_id"))
-    private Collection<Nurse> nurses;
+            inverseJoinColumns = @JoinColumn(name = "employee_id"))
+    private Collection<Employee> employees;
 
     public long getId() {
         return id;
@@ -34,7 +27,11 @@ public class Centre {
         return name;
     }
 
-    public Collection<SupportStaff> getStaffs() {
-        return support_staffs;
+    public Collection<Employee> getStaffs() {
+        return employees;
+    }
+
+    public void addStaff(Employee staff){
+        this.employees.add(staff);
     }
 }
