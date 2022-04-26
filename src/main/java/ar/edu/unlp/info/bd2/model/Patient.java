@@ -11,6 +11,7 @@ public class Patient {
     @GeneratedValue
     private long id;
 
+    @Column(unique=true)
     private String email;
 
     private String password;

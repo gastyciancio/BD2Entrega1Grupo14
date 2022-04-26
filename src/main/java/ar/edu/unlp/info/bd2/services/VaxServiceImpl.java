@@ -5,6 +5,8 @@ import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.PersistenceException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Optional;
 
@@ -28,11 +30,11 @@ public class VaxServiceImpl implements VaxService{
         Patient newPatient = new Patient(email, fullname, password, dayOfBirth);
 
         try {
-            vax_repo.savePatient(newPatient);
-            return newPatient;
+            return vax_repo.savePatient(newPatient);
         }
-        catch (Exception e) {
-            throw new VaxException("error creando paciente");
+
+        catch (VaxException e) {
+            throw e;
         }
     };
 

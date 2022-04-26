@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class, HibernateConfiguration.class}, loader = AnnotationConfigContextLoader.class)
 @Transactional
-@Rollback(true)
+@Rollback(true)	//Cambiar a false si no queres que se autoborre cuando corre tests
 public class VaxServiceTestCase {
 	private Date dob;
 
@@ -53,9 +53,9 @@ public class VaxServiceTestCase {
     	assertEquals("Federico Orlando",user.getFullname());
     	assertEquals(dob, user.getDayOfBirth());
     	assertEquals("pas$w0rd", user.getPassword());
-    	VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
-    	assertEquals("Constraint Violation",ex.getMessage());
-    }
+		VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
+		assertEquals("Constraint Violation",ex.getMessage());
+	}
 
 	/**
 

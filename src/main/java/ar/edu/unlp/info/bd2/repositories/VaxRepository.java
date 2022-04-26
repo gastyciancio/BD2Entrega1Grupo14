@@ -2,47 +2,45 @@ package ar.edu.unlp.info.bd2.repositories;
 
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.services.VaxService;
+import ar.edu.unlp.info.bd2.repositories.VaxException;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Optional;
 import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.*;
 
 public class VaxRepository  {
 
-    public void savePatient (Patient newPatient) {
-        // HibernateConfiguration hc = new HibernateConfiguration();
-        // PlatformTransactionManager pt= hc.hibernateTransactionManager().getTransaction();
-        EntityManagerFactory emf= Persistence.createEntityManagerFactory("grupo14");
-        EntityManager em= emf.createEntityManager();
-        EntityTransaction t= em.getTransaction();
+    @Autowired
+    SessionFactory sessionFactory;
+
+    public Patient savePatient (Patient newPatient) throws VaxException {
         try {
-            t.begin();
-            em.persist(newPatient);
-            t.commit();
-        } catch (Exception e) {
-            t.rollback();
+            long patientId = (long) sessionFactory.getCurrentSession().save(newPatient);
+            return getPatientById(patientId);
+        }
+        catch (PersistenceException e) {
+            throw new VaxException("Constraint Violation");
         }
     }
 
+    public Patient getPatientById(long id) {
+        String query = "FROM Patient WHERE id = :idP";  //HQL
+        return (Patient) sessionFactory.getCurrentSession().createQuery(query).setParameter("idP", id).uniqueResult();
+    }
+
     public Optional<Patient> findPatientByEmail(String email){
-
-        EntityManagerFactory emf= Persistence.createEntityManagerFactory("bd2grupo14");
-        EntityManager em= emf.createEntityManager();
-
-        try {
-
-           Query consulta= (Query) em.createQuery("select p from Patient where p.email ="+email);
-           return (Optional<Patient>) consulta.getSingleResult();
-
-        } catch (Exception e) {
-            return null;
-        }
-
+        String query = "FROM Patient WHERE email = :emailPatient";
+        return sessionFactory.getCurrentSession().createQuery(query).setParameter("emailPatient", email).uniqueResultOptional();
     }
 
     /**
