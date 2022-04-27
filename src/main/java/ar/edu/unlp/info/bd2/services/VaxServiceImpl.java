@@ -43,8 +43,6 @@ public class VaxServiceImpl implements VaxService{
      * @return la vacuna creada
      * @throws VaxException
      */
-
-    /**
     public Vaccine createVaccine(String name) throws VaxException {
         Vaccine newVaccine = new Vaccine(name);
 
@@ -55,7 +53,6 @@ public class VaxServiceImpl implements VaxService{
             throw e;
         }
     }
-     **/
 
     /**
      *
@@ -125,9 +122,19 @@ public class VaxServiceImpl implements VaxService{
      * @return el enfermero creado
      * @throws VaxException
      */
-   /**
-   Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException;
-**/
+
+   public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException{
+
+       Nurse newNurse = new Nurse(fullName,dni,experience);
+       try{
+           return vax_repo.saveNurse(newNurse);
+       }
+       catch (VaxException e){
+           throw e;
+       }
+
+   };
+
     /**
      * @param dni el dni
      * @param fullName nombre completo
