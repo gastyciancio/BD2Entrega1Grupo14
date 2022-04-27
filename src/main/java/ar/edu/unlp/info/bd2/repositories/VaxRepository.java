@@ -28,6 +28,10 @@ public class VaxRepository  {
     @Autowired
     SessionFactory sessionFactory;
 
+    /**
+     * Guardamos un paciente (patient) en la base de datos, usando el método getPatientById para
+     * recuperar el id de este.
+     * **/
     public Patient savePatient (Patient newPatient) throws VaxException {
         try {
             long patientId = (long) sessionFactory.getCurrentSession().save(newPatient);

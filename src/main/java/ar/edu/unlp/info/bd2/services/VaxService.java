@@ -60,9 +60,9 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el centro de vacunación nuevo
 	 * @throws VaxException
 	 */
-/**
+
 	Centre createCentre(String name) throws VaxException;
-**/
+
 	/**
 	 * @param dni el dni
 	 * @param fullName nombre del/la enfermero/a
@@ -70,9 +70,9 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el enfermero creado
 	 * @throws VaxException
 	 */
-/**
+
 	Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException;
-**/
+
 	/**
 	* @param dni el dni
 	* @param fullName nombre completo

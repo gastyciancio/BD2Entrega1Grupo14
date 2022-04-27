@@ -64,7 +64,7 @@ public class VaxServiceImpl implements VaxService{
      * @return el usuario creado
      * @throws VaxException
      */
-    /**
+
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException{
         Shot newShot = new Shot(patient, vaccine, date, centre, nurse);
 
@@ -75,7 +75,7 @@ public class VaxServiceImpl implements VaxService{
             throw e;
         }
     }
-    **/
+
 
     /**
      *

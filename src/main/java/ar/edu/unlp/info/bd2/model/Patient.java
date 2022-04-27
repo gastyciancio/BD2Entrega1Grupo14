@@ -55,6 +55,7 @@ public class Patient {
         return shots;
     }
 
+    public void addShot(Shot newShot) {getShots().add(newShot);}
 
 }
 

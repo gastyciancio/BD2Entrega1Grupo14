@@ -10,6 +10,7 @@ public class Vaccine {
         @GeneratedValue
         private long id;
 
+        @Column(unique=true)
         private String name;
 
         @ManyToMany
