@@ -32,7 +32,6 @@ public class VaxServiceImpl implements VaxService{
         try {
             return vax_repo.savePatient(newPatient);
         }
-
         catch (VaxException e) {
             throw e;
         }
@@ -50,11 +49,10 @@ public class VaxServiceImpl implements VaxService{
         Vaccine newVaccine = new Vaccine(name);
 
         try {
-            vax_repo.saveVaccine(newVaccine);
-            return newVaccine;
+            return vax_repo.saveVaccine(newVaccine);
         }
-        catch (Exception e) {
-            throw new VaxException("error creando vacuna");
+        catch (VaxException e) {
+            throw e;
         }
     }
      **/
@@ -71,7 +69,14 @@ public class VaxServiceImpl implements VaxService{
      */
     /**
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException{
-        Shot newShot = new Shot(patient, vaccine, date, centre, nurse)
+        Shot newShot = new Shot(patient, vaccine, date, centre, nurse);
+
+        try{
+            return vax_repo.saveShot(newShot);
+        }
+        catch (VaxException e) {
+            throw e;
+        }
     }
     **/
 
@@ -82,37 +87,36 @@ public class VaxServiceImpl implements VaxService{
      */
 
     public Optional<Patient> getPatientByEmail(String email) {
-        Optional<Patient> newPatient = vax_repo.findPatientByEmail(email);
-        return newPatient;
+        return vax_repo.findPatientByEmail(email);
     }
-
 
     /**
      *
      * @param name nombre de la vacuna
      * @return
      */
-   /**
-    Optional<Vaccine> getVaccineByName(String name);
-**/
+
+    public Optional<Vaccine> getVaccineByName(String name) {
+        return vax_repo.getVaccineByName(name);
+    }
+
     /**
      *
      * @param name nombre del centro de vacunación
      * @return el centro de vacunación nuevo
      * @throws VaxException
      */
-  /**
-    Centre createCentre(String name) throws VaxException{
+
+    public Centre createCentre(String name) throws VaxException{
         Centre newCentre = new Centre(name);
         try{
-
+            return vax_repo.saveCentre(newCentre);
         }
-        catch (Exception e){
-            throw new VaxException("Error creando el centro")
+        catch (VaxException e){
+            throw e;
         }
-    };
+    }
 
-**/
 
     /**
      * @param dni el dni

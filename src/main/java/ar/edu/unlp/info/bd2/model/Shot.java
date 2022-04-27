@@ -63,4 +63,7 @@ public class Shot {
         return shotCertificate;
     }
 
+    public void setShotCertificate(ShotCertificate shotCertificate) {
+        this.shotCertificate = shotCertificate;
+    }
 }

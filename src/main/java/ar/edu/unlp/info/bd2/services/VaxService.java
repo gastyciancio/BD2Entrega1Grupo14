@@ -25,8 +25,8 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return la vacuna creada
 	 * @throws VaxException
 	 */
-/**	Vaccine createVaccine(String name) throws VaxException;
-**/
+	Vaccine createVaccine(String name) throws VaxException;
+
 	/**
 	 *
 	 * @param patient paciente vacunado
@@ -37,27 +37,23 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el usuario creado
 	 * @throws VaxException
 	 */
-/**
 	Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException;
-**/
 
 	/**
 	 * 
 	 * @param email email del usuario
 	 * @return
 	 */
-
 	Optional<Patient> getPatientByEmail(String email);
-
 
 	/**
 	 *
 	 * @param name nombre de la vacuna
 	 * @return
 	 */
-/**
+
 	Optional<Vaccine> getVaccineByName(String name);
-**/
+
 	/**
 	 *
 	 * @param name nombre del centro de vacunación

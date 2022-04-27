@@ -44,7 +44,10 @@ public class VaxRepository  {
     }
 
     /**
-    public void saveVaccine(Vaccine newVaccine) {
+     * Guardamos una vacuna (vaccine) en la base de datos, usando el método getVaccineById para
+     * recuperar el id de esta.
+     * Con getVaccineByName recuperamos el nombre de la vacuna.
+     * **/
 
     }
      **/
