@@ -164,9 +164,16 @@ public class VaxServiceImpl implements VaxService{
      * @param name el nombre del centro a buscar
      * @return el centro
      * */
-    /**
-    Optional<Centre> getCentreByName(String name) throws VaxException;
-/**
+
+    public Optional<Centre> getCentreByName(String name) throws VaxException{
+        try {
+            return vax_repo.getCentreByName(name);
+        }
+        catch (VaxException e){
+            throw e;
+        }
+    };
+
     /**
      * @param staff el staff a actualizar
      * @return el staff

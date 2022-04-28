@@ -89,7 +89,7 @@ public class VaxServiceTestCase {
 		assertNotNull(shot.getShotCertificate());
 		assertNotNull(shot.getShotCertificate().getSerialNumber());
 	}
-/**
+
 	@Test
 	public void testCreateCentre() throws VaxException{
 		Centre nuevo = this.service.createCentre("Calle 2");
@@ -103,6 +103,7 @@ public class VaxServiceTestCase {
 		assertTrue(calle2.getStaffs().contains(fabian));
 		assertTrue(fabian.getCentres().contains(calle2));
 	}
+	/**
 
 	@Test
 	public void testCreateSupportStaff() throws VaxException{

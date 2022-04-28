@@ -101,9 +101,9 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param name el nombre del centro a buscar
 	 * @return el centro
 	 * */
-	/**
+
 	Optional<Centre> getCentreByName(String name) throws VaxException;
-	 **/
+
 
 	/**
 	 * @param staff el staff a actualizar

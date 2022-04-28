@@ -158,5 +158,10 @@ public class VaxRepository  {
         return (Centre) sessionFactory.getCurrentSession().createQuery(query).setParameter("idC", id).uniqueResult();
     }
 
+    public Optional<Centre> getCentreByName(String name) throws VaxException{
+        String query = "FROM Centre WHERE name = :nameC";  //HQL
+        return sessionFactory.getCurrentSession().createQuery(query).setParameter("nameC", name).uniqueResultOptional();
+    }
+
 
 }
