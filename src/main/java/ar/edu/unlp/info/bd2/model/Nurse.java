@@ -3,6 +3,8 @@ package ar.edu.unlp.info.bd2.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.Collection;
 
 @Entity
 public class Nurse extends Employee{
@@ -11,10 +13,14 @@ public class Nurse extends Employee{
     @GeneratedValue
     private long id;
 
-    private String dni;
-
-    private String fullname;
-
     private Integer experience;
 
+    public Nurse(String fullname, String dni, Integer experience) {
+        super(fullname, dni);
+        this.experience = experience;
+    }
+
+    public Nurse() {
+
+    }
 }

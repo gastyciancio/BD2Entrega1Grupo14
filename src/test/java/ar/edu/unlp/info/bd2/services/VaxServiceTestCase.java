@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class, HibernateConfiguration.class}, loader = AnnotationConfigContextLoader.class)
 @Transactional
-@Rollback(true)
+@Rollback(true)	//Cambiar a false si no queres que se autoborre cuando corre tests
 public class VaxServiceTestCase {
 	private Date dob;
 
@@ -40,22 +40,22 @@ public class VaxServiceTestCase {
 	}
 
     @Test
-    public void testCreatePatient() throws VaxException{
+    public void testCreatePatient() throws VaxException {
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
-    	assertNotNull (fede.getId());
-    	assertEquals("Federico Orlando", fede.getFullname());
-    	Optional<Patient> us = this.service.getPatientByEmail("federico.orlando@info.unlp.edu.ar");
-    	if (!us.isPresent()) {
+		assertNotNull(fede.getId());
+		assertEquals("Federico Orlando", fede.getFullname());
+		Optional<Patient> us = this.service.getPatientByEmail("federico.orlando@info.unlp.edu.ar");
+		if (!us.isPresent()) {
 			throw new VaxException("Patient doesn't exist");
 		}
 		Patient user = us.get();
-		assertNotNull (user.getId());
-    	assertEquals("Federico Orlando",user.getFullname());
-    	assertEquals(dob, user.getDayOfBirth());
-    	assertEquals("pas$w0rd", user.getPassword());
-    	VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
-    	assertEquals("Constraint Violation",ex.getMessage());
-    }
+		assertNotNull(user.getId());
+		assertEquals("Federico Orlando", user.getFullname());
+		assertEquals(dob, user.getDayOfBirth());
+		assertEquals("pas$w0rd", user.getPassword());
+		VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
+		assertEquals("Constraint Violation", ex.getMessage());
+	}
 
 	@Test
 	public void testCreateVaccine() throws VaxException{
@@ -88,9 +88,8 @@ public class VaxServiceTestCase {
 		assertTrue(fede.getShots().contains(shot));
 		assertNotNull(shot.getShotCertificate());
 		assertNotNull(shot.getShotCertificate().getSerialNumber());
-		
 	}
-
+/**
 	@Test
 	public void testCreateCentre() throws VaxException{
 		Centre nuevo = this.service.createCentre("Calle 2");
@@ -158,5 +157,6 @@ public class VaxServiceTestCase {
 		}
 
 	}
+	**/
 
 }

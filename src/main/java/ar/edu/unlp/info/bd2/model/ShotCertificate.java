@@ -12,7 +12,17 @@ public class ShotCertificate {
 
     private Date date;
 
-    private int serie;
+    private int serial_number;
 
+    public ShotCertificate() {
+    }
 
+    public ShotCertificate(Date date, int serial_number) {
+        this.date = date;
+        this.serial_number = serial_number;
+    }
+
+    public int getSerialNumber() {
+        return serial_number;
+    }
 }

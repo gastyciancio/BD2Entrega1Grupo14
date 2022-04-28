@@ -10,14 +10,28 @@ public class Vaccine {
         @GeneratedValue
         private long id;
 
+        @Column(unique=true)
         private String name;
 
         @ManyToMany
         @JoinTable(
-                name = "vaccine_vaccineshceduler",
+                name = "vaccine_vaccination_schedule",
                 joinColumns = @JoinColumn(name = "vaccine_id"),
-                inverseJoinColumns = @JoinColumn(name = "vacinnescheduluder_id"))
-        private Collection<VaccineScheduler> vaccine_schedulers;
+                inverseJoinColumns = @JoinColumn(name = "vaccination_schedule_id"))
+        private Collection<VaccinationSchedule> vaccination_schedule;
 
+        public Vaccine() {
+        }
 
+        public Vaccine(String name) {
+                this.name = name;
+        }
+
+        public long getId() {
+                return id;
+        }
+
+        public String getName() {
+                return name;
+        }
 }

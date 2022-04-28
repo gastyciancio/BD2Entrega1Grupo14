@@ -18,4 +18,28 @@ public class Centre {
             joinColumns = @JoinColumn(name = "centre_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Collection<Employee> employees;
+
+    public Centre() {
+    }
+
+    public Centre(String name) {
+        this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Collection<Employee> getStaffs() {
+        return employees;
+    }
+
+    public void addStaff(Employee staff){
+        this.employees.add(staff);
+    }
+
 }

@@ -38,7 +38,6 @@ public interface VaxService extends VaxStatisticsService{
 	 * @throws VaxException
 	 */
 	Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException;
-	
 
 	/**
 	 * 
@@ -47,12 +46,12 @@ public interface VaxService extends VaxStatisticsService{
 	 */
 	Optional<Patient> getPatientByEmail(String email);
 
-
 	/**
 	 *
 	 * @param name nombre de la vacuna
 	 * @return
 	 */
+
 	Optional<Vaccine> getVaccineByName(String name);
 
 	/**
@@ -61,6 +60,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el centro de vacunación nuevo
 	 * @throws VaxException
 	 */
+
 	Centre createCentre(String name) throws VaxException;
 
 	/**
@@ -70,6 +70,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el enfermero creado
 	 * @throws VaxException
 	 */
+
 	Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException;
 
 	/**
@@ -79,43 +80,55 @@ public interface VaxService extends VaxStatisticsService{
 	* @return el personal de apoyo creado
 	* @throws VaxException
 	* */
+/**
 	SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException;
-
+**/
 	/**
 	 * @return el esquema nueva vacío
 	 * @throws VaxException
 	 * */
+/**
 	VaccinationSchedule createVaccinationSchedule() throws VaxException;
-
+**/
 	/**
 	 * @param id el id del esquema
 	 * @return el esquema de vacunación
 	 * */
+/**
 	VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
-
+**/
 	/**
 	 * @param name el nombre del centro a buscar
 	 * @return el centro
 	 * */
+	/**
 	Optional<Centre> getCentreByName(String name) throws VaxException;
+	 **/
 
 	/**
 	 * @param staff el staff a actualizar
 	 * @return el staff
 	 * @throws VaxException 
 	 */
+	/**
 	SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
+	 **/
+
 
 	/**
 	 * @param centre el centre a actualizar
 	 * @return el centre
 	 * @throws VaxException 
 	 */
+	/**
 	Centre updateCentre(Centre centre);
+	 **/
 
 	/**
 	 * @param dni el dni del SupportStaff a buscar
 	 * @return el SupportStaff
 	 * */
+	/**
 	Optional<SupportStaff> getSupportStaffByDni(String dni);
+	**/
 }
