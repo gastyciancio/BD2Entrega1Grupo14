@@ -89,7 +89,7 @@ public class VaxServiceTestCase {
 		assertNotNull(shot.getShotCertificate());
 		assertNotNull(shot.getShotCertificate().getSerialNumber());
 	}
-/**
+
 	@Test
 	public void testCreateCentre() throws VaxException{
 		Centre nuevo = this.service.createCentre("Calle 2");
@@ -103,6 +103,7 @@ public class VaxServiceTestCase {
 		assertTrue(calle2.getStaffs().contains(fabian));
 		assertTrue(fabian.getCentres().contains(calle2));
 	}
+
 
 	@Test
 	public void testCreateSupportStaff() throws VaxException{
@@ -119,7 +120,6 @@ public class VaxServiceTestCase {
 		assertEquals(1,AnaSaved.getCentres().size());
 		assertEquals(1,italiano.getStaffs().size());
 		assertTrue(italiano.getStaffs().contains(AnaSaved));
-		
 	}
 
 	@Test
@@ -138,6 +138,7 @@ public class VaxServiceTestCase {
 		shortSchedule.addVaccine(az);
 
 		try {
+			//Si nunca le hizo update a schedule por que tiene las vacunas?
 			VaccinationSchedule savedSchedule = this.service.getVaccinationScheduleById(schedule.getId());
 			assertNotNull (savedSchedule.getId());
 			assertTrue(savedSchedule.getVaccines().contains(az));
@@ -157,6 +158,5 @@ public class VaxServiceTestCase {
 		}
 
 	}
-	**/
 
 }

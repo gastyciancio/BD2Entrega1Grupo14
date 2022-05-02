@@ -1,6 +1,7 @@
 package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -16,7 +17,7 @@ public class Employee {
     private String dni;
 
     @ManyToMany(mappedBy = "employees")
-    private Collection<Centre> centres;
+    private Collection<Centre> centres = new ArrayList<>();
 
     public Employee() {
     }

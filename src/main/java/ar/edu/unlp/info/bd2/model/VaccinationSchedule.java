@@ -15,8 +15,8 @@ public class VaccinationSchedule {
     @GeneratedValue
     private long id;
 
-    @ManyToMany(mappedBy = "vaccination_schedule")
-    private List<Vaccine> vaccines;
+    @ManyToMany(mappedBy = "vaccination_schedules")
+    private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {
     }
@@ -32,5 +32,4 @@ public class VaccinationSchedule {
     public void addVaccine(Vaccine v){
         this.vaccines.add(v);
     }
-
 }

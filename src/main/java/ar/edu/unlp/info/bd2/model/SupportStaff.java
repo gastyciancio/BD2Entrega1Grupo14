@@ -18,7 +18,7 @@ public class SupportStaff extends Employee{
 
     }
 
-    public SupportStaff(String fullname, String dni, String area) {
+    public SupportStaff(String dni, String fullname, String area) {
         super(fullname, dni);
         this.area = area;
     }

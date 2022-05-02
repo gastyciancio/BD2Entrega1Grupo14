@@ -142,31 +142,61 @@ public class VaxServiceImpl implements VaxService{
      * @return el personal de apoyo creado
      * @throws VaxException
      * */
-/**
-    SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException;
-**/
+
+    public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
+        SupportStaff newSupportStaff = new SupportStaff(dni, fullName, area);
+        try{
+            return vax_repo.saveSupportStaff(newSupportStaff);
+        }
+        catch (VaxException e){
+            throw e;
+        }
+    }
+
     /**
      * @return el esquema nueva vacío
      * @throws VaxException
      * */
 
-    /**
-    VaccinationSchedule createVaccinationSchedule() throws VaxException;
-**/
+
+    public VaccinationSchedule createVaccinationSchedule() throws VaxException{
+        VaccinationSchedule newVaccinationSchedule = new VaccinationSchedule();
+        try{
+            return vax_repo.saveVaccinationSchedule(newVaccinationSchedule);
+        }
+        catch (VaxException e){
+            throw e;
+        }
+    }
+
     /**
      * @param id el id del esquema
      * @return el esquema de vacunación
      * */
-    /**
-    VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
-**/
+
+    public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
+        try {
+            return vax_repo.getVaccinationScheduleById(id);
+        }
+        catch (VaxException e){
+            throw e;
+        }
+    }
+
     /**
      * @param name el nombre del centro a buscar
      * @return el centro
      * */
-    /**
-    Optional<Centre> getCentreByName(String name) throws VaxException;
-/**
+
+    public Optional<Centre> getCentreByName(String name) throws VaxException{
+        try {
+            return vax_repo.getCentreByName(name);
+        }
+        catch (VaxException e){
+            throw e;
+        }
+    };
+
     /**
      * @param staff el staff a actualizar
      * @return el staff
@@ -175,22 +205,23 @@ public class VaxServiceImpl implements VaxService{
     /**
     SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
 **/
+
     /**
      * @param centre el centre a actualizar
      * @return el centre
      * @throws VaxException
      */
+    public Centre updateCentre(Centre centre){
+        return vax_repo.updateCentre(centre);
+    }
 
-    /**
-    Centre updateCentre(Centre centre);
-
-     **/
 
     /**
      * @param dni el dni del SupportStaff a buscar
      * @return el SupportStaff
      * */
-    /**
-    Optional<SupportStaff> getSupportStaffByDni(String dni);
-     **/
+    public Optional<SupportStaff> getSupportStaffByDni(String dni) {
+        return vax_repo.getSupportStaffByDni(dni);
+    };
+
 }

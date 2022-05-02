@@ -1,6 +1,7 @@
 package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -18,7 +19,7 @@ public class Vaccine {
                 name = "vaccine_vaccination_schedule",
                 joinColumns = @JoinColumn(name = "vaccine_id"),
                 inverseJoinColumns = @JoinColumn(name = "vaccination_schedule_id"))
-        private Collection<VaccinationSchedule> vaccination_schedule;
+        private Collection<VaccinationSchedule> vaccination_schedules = new ArrayList<>();
 
         public Vaccine() {
         }
