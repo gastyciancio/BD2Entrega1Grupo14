@@ -158,16 +158,31 @@ public class VaxServiceImpl implements VaxService{
      * @throws VaxException
      * */
 
-    /**
-    VaccinationSchedule createVaccinationSchedule() throws VaxException;
-**/
+
+    public VaccinationSchedule createVaccinationSchedule() throws VaxException{
+        VaccinationSchedule newVaccinationSchedule = new VaccinationSchedule();
+        try{
+            return vax_repo.saveVaccinationSchedule(newVaccinationSchedule);
+        }
+        catch (VaxException e){
+            throw e;
+        }
+    }
+
     /**
      * @param id el id del esquema
      * @return el esquema de vacunación
      * */
-    /**
-    VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
-**/
+
+    public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
+        try {
+            return vax_repo.getVaccinationScheduleById(id);
+        }
+        catch (VaxException e){
+            throw e;
+        }
+    }
+
     /**
      * @param name el nombre del centro a buscar
      * @return el centro

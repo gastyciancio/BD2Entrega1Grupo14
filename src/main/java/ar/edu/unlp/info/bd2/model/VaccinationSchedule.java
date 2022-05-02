@@ -16,7 +16,7 @@ public class VaccinationSchedule {
     private long id;
 
     @ManyToMany(mappedBy = "vaccination_schedule")
-    private List<Vaccine> vaccines;
+    private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {
     }
