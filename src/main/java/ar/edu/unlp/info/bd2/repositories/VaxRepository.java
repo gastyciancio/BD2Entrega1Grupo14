@@ -163,5 +163,53 @@ public class VaxRepository  {
         return sessionFactory.getCurrentSession().createQuery(query).setParameter("nameC", name).uniqueResultOptional();
     }
 
+    /**
+     * Guardamos un supportStaff en la base de datos, usando el método getSupportStaffById para
+     * recuperar el id de este.
+     * **/
 
+    public SupportStaff saveSupportStaff(SupportStaff newSupportStaff) throws VaxException{
+        try{
+            long supportStaffId = (long) sessionFactory.getCurrentSession().save(newSupportStaff);
+            return getSupportStaffById(supportStaffId);
+        }
+        catch (PersistenceException e) {
+            throw new VaxException("Constraint Violation");
+        }
+    }
+
+    private SupportStaff getSupportStaffById(long id) {
+        String query = "FROM SupportStaff WHERE id = :idS";  //HQL
+        return (SupportStaff) sessionFactory.getCurrentSession().createQuery(query).setParameter("idS", id).uniqueResult();
+    }
+
+    public Centre updateCentre(Centre centre){
+        sessionFactory.getCurrentSession().update(centre);
+        return getCentreById(centre.getId());
+    }
+
+    public Optional<SupportStaff> getSupportStaffByDni(String dniS) {
+        String query = "FROM SupportStaff WHERE dni = :dniS";  //HQL
+        return sessionFactory.getCurrentSession().createQuery(query).setParameter("dniS", dniS).uniqueResultOptional();
+    }
+
+    /**
+     * Guardamos un vaccinationSchedule en la base de datos, usando el método getVaccinationScheduleById para
+     * recuperar el id de este.
+     * **/
+
+    public VaccinationSchedule saveVaccinationSchedule(VaccinationSchedule newVaccinationSchedule) throws VaxException{
+        try{
+            long vaccinationScheduleId = (long) sessionFactory.getCurrentSession().save(newVaccinationSchedule);
+            return getVaccinationScheduleById(vaccinationScheduleId);
+        }
+        catch (PersistenceException e) {
+            throw new VaxException("Constraint Violation");
+        }
+    }
+
+    public VaccinationSchedule getVaccinationScheduleById(long id) throws VaxException {
+        String query = "FROM VaccinationSchedule WHERE id = :idVS";  //HQL
+        return (VaccinationSchedule) sessionFactory.getCurrentSession().createQuery(query).setParameter("idVS", id).uniqueResult();
+    }
 }

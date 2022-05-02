@@ -142,9 +142,17 @@ public class VaxServiceImpl implements VaxService{
      * @return el personal de apoyo creado
      * @throws VaxException
      * */
-/**
-    SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException;
-**/
+
+    public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
+        SupportStaff newSupportStaff = new SupportStaff(dni, fullName, area);
+        try{
+            return vax_repo.saveSupportStaff(newSupportStaff);
+        }
+        catch (VaxException e){
+            throw e;
+        }
+    }
+
     /**
      * @return el esquema nueva vacío
      * @throws VaxException
@@ -182,22 +190,23 @@ public class VaxServiceImpl implements VaxService{
     /**
     SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
 **/
+
     /**
      * @param centre el centre a actualizar
      * @return el centre
      * @throws VaxException
      */
+    public Centre updateCentre(Centre centre){
+        return vax_repo.updateCentre(centre);
+    }
 
-    /**
-    Centre updateCentre(Centre centre);
-
-     **/
 
     /**
      * @param dni el dni del SupportStaff a buscar
      * @return el SupportStaff
      * */
-    /**
-    Optional<SupportStaff> getSupportStaffByDni(String dni);
-     **/
+    public Optional<SupportStaff> getSupportStaffByDni(String dni) {
+        return vax_repo.getSupportStaffByDni(dni);
+    };
+
 }
