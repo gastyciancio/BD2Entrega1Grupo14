@@ -1,0 +1,4 @@
+Para crear la BD ir a MySQL Workbench y seleccionar Local instance 3306. En caso de pedir contraseña ingresarla.
+Una vez ingresado, a la izquierda de la pantalla hay un menu con opciones, elegir "User and Privileges". Luego elegir "Add Account". 
+Dentro del formulario de creacion, en Login name poner grupo14. En password y confirm password poner pa$$word. Luego seleccionar Apply.
+Clonar el repositorio, y en la consola ejecutar mvn clean install para correr los test.
