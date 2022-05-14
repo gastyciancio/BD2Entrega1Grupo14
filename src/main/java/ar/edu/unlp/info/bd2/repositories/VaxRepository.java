@@ -12,10 +12,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
 import org.springframework.transaction.TransactionStatus;
@@ -208,8 +206,38 @@ public class VaxRepository  {
         }
     }
 
-    public VaccinationSchedule getVaccinationScheduleById(long id) throws VaxException {
+    public VaccinationSchedule getVaccinationScheduleById(long id) throws VaxException{
         String query = "FROM VaccinationSchedule WHERE id = :idVS";  //HQL
         return (VaccinationSchedule) sessionFactory.getCurrentSession().createQuery(query).setParameter("idVS", id).uniqueResult();
     }
+
+    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException{
+        sessionFactory.getCurrentSession().update(vaccinationSchedule);
+        try {
+            return getVaccinationScheduleById(vaccinationSchedule.getId());
+        }
+        catch (PersistenceException e) {
+            throw new VaxException("Constraint Violation");
+        }
+    }
+
+    // -------------------------------------------------- Entrega2 ------------------------------------------------------
+
+    public List<Patient> getAllPatients() {
+        String query = "FROM Patient";  //HQL
+        return  sessionFactory.getCurrentSession().createQuery(query).list();
+    }
+
+    public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
+        String query = "FROM Nurse WHERE experience > :years";  //HQL
+        return  sessionFactory.getCurrentSession().createQuery(query).setParameter("years", years).list();
+    }
+
+    public List<Centre> getCentresTopNStaff(int n) {
+        String query = "FROM Centre c order by size(c.employees)";
+        return  sessionFactory.getCurrentSession().createQuery(query).setMaxResults(n).list();
+
+
+    }
+
 }

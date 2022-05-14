@@ -122,6 +122,7 @@ public class VaxServiceTestCase {
 		assertTrue(italiano.getStaffs().contains(AnaSaved));
 	}
 
+
 	@Test
 	public void testVaccinationSchedule() throws VaxException{
 		Vaccine az = this.service.createVaccine("AstraZeneca");
@@ -156,7 +157,7 @@ public class VaxServiceTestCase {
 		catch (Exception e) {
 			throw new VaxException("Schedule doesn't exists");
 		}
-
 	}
 
 }
+ **/

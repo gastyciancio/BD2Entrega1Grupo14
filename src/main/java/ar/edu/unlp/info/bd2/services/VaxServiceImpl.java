@@ -224,4 +224,27 @@ public class VaxServiceImpl implements VaxService{
         return vax_repo.getSupportStaffByDni(dni);
     };
 
+    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
+        try {
+            return vax_repo.updateVaccinationSchedule(vaccinationSchedule);
+        }
+        catch (VaxException e) {
+            throw e;
+        }
+    }
+
+    // -------------------------------------------------- Entrega2 ------------------------------------------------------
+
+
+    public List<Patient> getAllPatients(){
+        return vax_repo.getAllPatients();
+    }
+
+    public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
+        return vax_repo.getNurseWithMoreThanNYearsExperience(years);
+    }
+
+    public List<Centre> getCentresTopNStaff(int n) {
+        return vax_repo.getCentresTopNStaff(n);
+    }
 }
