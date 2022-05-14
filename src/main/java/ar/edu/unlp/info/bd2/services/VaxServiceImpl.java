@@ -17,7 +17,7 @@ public class VaxServiceImpl implements VaxService{
     public VaxServiceImpl(VaxRepository repo){
         this.vax_repo=repo;
     }
-
+//--------------------------------------------- Entrega 1 -----------------------------------------------------
     /**
      *
      * @param email email del usuario con el cual ingresa al sitio

@@ -30,6 +30,7 @@ public class VaxRepository  {
     @Autowired
     SessionFactory sessionFactory;
 
+//--------------------------------------- Entrega 1 -------------------------------------------------------------
     /**
      * Guardamos un paciente (patient) en la base de datos, usando el método getPatientById para
      * recuperar el id de este.
