@@ -1,4 +1,4 @@
-package ar.edu.unlp.info.bd2.utils;
+package ar.edu.unlp.info.bd2.util;
 
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.services.VaxService;

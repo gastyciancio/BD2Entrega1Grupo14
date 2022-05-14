@@ -3,7 +3,7 @@ package ar.edu.unlp.info.bd2.services;
 import ar.edu.unlp.info.bd2.config.AppConfig;
 import ar.edu.unlp.info.bd2.config.DBInitializerConfig;
 import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
-import ar.edu.unlp.info.bd2.utils.DBInitializer;
+import ar.edu.unlp.info.bd2.util.DBInitializer;
 import ar.edu.unlp.info.bd2.model.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
@@ -75,7 +75,11 @@ public class VaxStatisticsTestCase {
     @Test
     public void testGetCentresTopNStaff() {
     	List<Centre> centres = this.service.getCentresTopNStaff(5);
+        for (int i=0;i<centres.size();i++){
+            System.out.println(centres.get(i).getName());
+        }
     	assertEquals(5,centres.size());
+
     	this.assertListEquality(centres.stream().map(property -> property.getName()).collect(Collectors.toList()), Arrays.asList("Hospital San Juan de Dios","SADOP","PAMI","ATE","Abasto"));
     }
     

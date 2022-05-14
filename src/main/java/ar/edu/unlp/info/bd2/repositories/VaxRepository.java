@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.io.Serializable;
@@ -17,10 +18,13 @@ import java.util.stream.Collectors;
 
 import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.*;
 
+@Transactional
+@Repository
 public class VaxRepository  {
 
     @Autowired

@@ -23,4 +23,8 @@ public class Nurse extends Employee{
     public Nurse() {
 
     }
+
+    public Integer getExperience() {
+        return experience;
+    }
 }
