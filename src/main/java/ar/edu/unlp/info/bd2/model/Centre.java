@@ -44,7 +44,4 @@ public class Centre {
         staff.getCentres().add(this);
     }
 
-    public Collection<Employee> getEmployees() {
-        return employees;
-    }
 }

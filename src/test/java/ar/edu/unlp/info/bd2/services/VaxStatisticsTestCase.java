@@ -7,6 +7,7 @@ import ar.edu.unlp.info.bd2.util.DBInitializer;
 import ar.edu.unlp.info.bd2.model.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,14 +18,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class, HibernateConfiguration.class, DBInitializerConfig.class }, loader = AnnotationConfigContextLoader.class)
 @Transactional
@@ -40,13 +39,14 @@ public class VaxStatisticsTestCase {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    @BeforeAll
+    @BeforeEach
     public void prepareDB() throws Exception {
         this.initializer.prepareDB();
     }
-
+/**
     @Test
     public void testTrue(){ assertEquals(1,1);}
+    **/
 
     private <T> void assertListEquality(List<T> list1, List<T> list2) {
         if (list1.size() != list2.size()) {
@@ -59,6 +59,7 @@ public class VaxStatisticsTestCase {
           }
         }
       }
+      /**
 
     @Test
     public void testGetAllPatients() {
@@ -71,13 +72,11 @@ public class VaxStatisticsTestCase {
     	assertEquals(4,nurses.size());
     	this.assertListEquality(nurses.stream().map(property -> property.getFullName()).collect(Collectors.toList()),Arrays.asList("Arneris Ibáñez","Emir Vidal","Cornelio Sánchez","Kristin Vega"));
     }
+       **/
 
     @Test
-    public void testGetCentresTopNStaff() {
+    public void testGetCentresTopNStaff() throws Exception {
     	List<Centre> centres = this.service.getCentresTopNStaff(5);
-        for (int i=0;i<centres.size();i++){
-            System.out.println(centres.get(i).getName());
-        }
     	assertEquals(5,centres.size());
 
     	this.assertListEquality(centres.stream().map(property -> property.getName()).collect(Collectors.toList()), Arrays.asList("Hospital San Juan de Dios","SADOP","PAMI","ATE","Abasto"));

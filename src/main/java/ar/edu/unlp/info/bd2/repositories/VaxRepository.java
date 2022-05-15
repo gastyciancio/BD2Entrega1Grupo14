@@ -1,25 +1,13 @@
 package ar.edu.unlp.info.bd2.repositories;
 
 import ar.edu.unlp.info.bd2.model.*;
-import ar.edu.unlp.info.bd2.services.VaxService;
-import ar.edu.unlp.info.bd2.repositories.VaxException;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.PlatformTransactionManager;
-
-import java.io.Serializable;
-import java.time.Instant;
 import java.util.*;
-import java.util.stream.Collectors;
-
-import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.*;
 
@@ -239,10 +227,9 @@ public class VaxRepository  {
     }
 
     public List<Centre> getCentresTopNStaff(int n) {
-        String query = "FROM Centre c order by size(c.employees)";
+        String query = "FROM Centre c order by employees.size DESC";
         return  sessionFactory.getCurrentSession().createQuery(query).setMaxResults(n).list();
-
-
+        
     }
 
 }
