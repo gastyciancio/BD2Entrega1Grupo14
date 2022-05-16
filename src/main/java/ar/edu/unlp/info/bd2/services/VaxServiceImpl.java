@@ -248,4 +248,9 @@ public class VaxServiceImpl implements VaxService{
     public List<Centre> getCentresTopNStaff(int n) {
         return vax_repo.getCentresTopNStaff(n);
     }
+
+    public Centre getTopShotCentre() {
+        return vax_repo.getTopShotCentre();
+    }
+
 }

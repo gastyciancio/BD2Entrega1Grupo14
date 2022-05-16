@@ -231,5 +231,9 @@ public class VaxRepository  {
         return  sessionFactory.getCurrentSession().createQuery(query).setMaxResults(n).list();
         
     }
+    public Centre getTopShotCentre() {
+        String query = "Select s.centre from Shot as s group by s.centre order by count(*) desc";
+        return (Centre) sessionFactory.getCurrentSession().createQuery(query).setMaxResults(1).uniqueResult();
+    }
 
 }

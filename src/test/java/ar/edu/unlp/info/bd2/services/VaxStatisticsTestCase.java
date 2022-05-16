@@ -43,10 +43,9 @@ public class VaxStatisticsTestCase {
     public void prepareDB() throws Exception {
         this.initializer.prepareDB();
     }
-/**
+
     @Test
     public void testTrue(){ assertEquals(1,1);}
-    **/
 
     private <T> void assertListEquality(List<T> list1, List<T> list2) {
         if (list1.size() != list2.size()) {
@@ -59,7 +58,7 @@ public class VaxStatisticsTestCase {
           }
         }
       }
-      /**
+
 
     @Test
     public void testGetAllPatients() {
@@ -72,21 +71,21 @@ public class VaxStatisticsTestCase {
     	assertEquals(4,nurses.size());
     	this.assertListEquality(nurses.stream().map(property -> property.getFullName()).collect(Collectors.toList()),Arrays.asList("Arneris Ibáñez","Emir Vidal","Cornelio Sánchez","Kristin Vega"));
     }
-       **/
 
-    @Test
+      @Test
     public void testGetCentresTopNStaff() throws Exception {
     	List<Centre> centres = this.service.getCentresTopNStaff(5);
     	assertEquals(5,centres.size());
 
     	this.assertListEquality(centres.stream().map(property -> property.getName()).collect(Collectors.toList()), Arrays.asList("Hospital San Juan de Dios","SADOP","PAMI","ATE","Abasto"));
     }
-    /**
+
+
     @Test
     public void testGetTopShotCentre() {
     	Centre centre = this.service.getTopShotCentre();
     	assertEquals("Hospital de Romero",centre.getName());
-    }**/
+    }
     /**
     @Test
     public void testGetNurseNotShot() {
