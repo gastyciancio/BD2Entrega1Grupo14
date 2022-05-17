@@ -227,13 +227,18 @@ public class VaxRepository  {
     }
 
     public List<Centre> getCentresTopNStaff(int n) {
-        String query = "FROM Centre c order by employees.size DESC";
-        return  sessionFactory.getCurrentSession().createQuery(query).setMaxResults(n).list();
-        
+        String query = "FROM Centre order by employees.size DESC";
+        return sessionFactory.getCurrentSession().createQuery(query).setMaxResults(n).list();
     }
+
     public Centre getTopShotCentre() {
         String query = "Select s.centre from Shot as s group by s.centre order by count(*) desc";
         return (Centre) sessionFactory.getCurrentSession().createQuery(query).setMaxResults(1).uniqueResult();
+    }
+
+    public List<Nurse> getNurseNotShot() {
+        String query = "FROM Nurse n WHERE n.id NOT IN (SELECT s.nurse.id FROM Shot s)";
+        return (List<Nurse>) sessionFactory.getCurrentSession().createQuery(query).list();
     }
 
 }

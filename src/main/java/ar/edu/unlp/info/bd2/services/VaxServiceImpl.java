@@ -253,4 +253,7 @@ public class VaxServiceImpl implements VaxService{
         return vax_repo.getTopShotCentre();
     }
 
+    public List<Nurse> getNurseNotShot() {
+        return vax_repo.getNurseNotShot();
+    }
 }

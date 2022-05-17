@@ -17,7 +17,8 @@ public class Centre {
     @JoinTable(
             name = "centre_employee",
             joinColumns = @JoinColumn(name = "centre_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id"))
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
     private Collection<Employee> employees = new ArrayList<>();
 
     public Centre() {

@@ -3,9 +3,11 @@ package ar.edu.unlp.info.bd2.util;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.services.VaxService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 
+@Transactional
 public class DBInitializer {
 
     @Autowired

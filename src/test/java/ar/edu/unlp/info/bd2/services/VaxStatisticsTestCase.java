@@ -39,7 +39,8 @@ public class VaxStatisticsTestCase {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    @BeforeEach
+
+    @BeforeAll
     public void prepareDB() throws Exception {
         this.initializer.prepareDB();
     }
@@ -59,7 +60,6 @@ public class VaxStatisticsTestCase {
         }
       }
 
-
     @Test
     public void testGetAllPatients() {
     	assertEquals(322,this.service.getAllPatients().size());
@@ -72,7 +72,7 @@ public class VaxStatisticsTestCase {
     	this.assertListEquality(nurses.stream().map(property -> property.getFullName()).collect(Collectors.toList()),Arrays.asList("Arneris Ibáñez","Emir Vidal","Cornelio Sánchez","Kristin Vega"));
     }
 
-      @Test
+    @Test
     public void testGetCentresTopNStaff() throws Exception {
     	List<Centre> centres = this.service.getCentresTopNStaff(5);
     	assertEquals(5,centres.size());
@@ -86,7 +86,7 @@ public class VaxStatisticsTestCase {
     	Centre centre = this.service.getTopShotCentre();
     	assertEquals("Hospital de Romero",centre.getName());
     }
-    /**
+
     @Test
     public void testGetNurseNotShot() {
     	List<Nurse> nurses = this.service.getNurseNotShot();
@@ -94,7 +94,7 @@ public class VaxStatisticsTestCase {
     	assertEquals("Kristin Vega",nurses.get(0).getFullName());
     	assertEquals("46768509",nurses.get(0).getDni());
     	assertEquals(Integer.valueOf(10),nurses.get(0).getExperience());
-    }**/
+    }
     /**
     @Test
     public void testGetLessEmployeesSupportStaffArea() {
