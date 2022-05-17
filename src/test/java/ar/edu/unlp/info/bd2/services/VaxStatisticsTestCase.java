@@ -18,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -101,7 +102,7 @@ public class VaxStatisticsTestCase {
     	String area = this.service.getLessEmployeesSupportStaffArea();
     	assertEquals("Observaciones",area);
     }
-//DECIA List<Staff> Y EN REALIDAD ES List<Employee> SE CONFUNDIERON????? PREGUNTARRRRRRRR
+
     @Test
     public void testGetStaffWithName() {
     	List<Employee> staffs = this.service.getStaffWithName("Hernández");
@@ -109,14 +110,14 @@ public class VaxStatisticsTestCase {
     	this.assertListEquality(staffs.stream().map(property -> property.getFullName()).collect(Collectors.toList()), Arrays.asList("Ceasar Hernández","Kasim Hernández","Modesty Hernández"));
     }
 
-    /**
+
     @Test
     public void testGetUnappliedVaccines() {
     	List<Vaccine> vaccines = this.service.getUnappliedVaccines();
     	assertEquals(1,vaccines.size());
     	assertEquals("Bharat",vaccines.get(0).getName());
-    }**/
-    /**
+    }
+
     @Test
     public void testGetShotCertificatesBetweenDates() {
     	List<ShotCertificate> certificates;
@@ -128,5 +129,5 @@ public class VaxStatisticsTestCase {
 			e.printStackTrace();
 		}
 
-    }**/
+    }
 }

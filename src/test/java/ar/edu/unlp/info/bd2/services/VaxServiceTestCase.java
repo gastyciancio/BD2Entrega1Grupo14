@@ -1,4 +1,4 @@
-/**package ar.edu.unlp.info.bd2.services;
+package ar.edu.unlp.info.bd2.services;
 
 import ar.edu.unlp.info.bd2.config.AppConfig;
 import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class, HibernateConfiguration.class}, loader = AnnotationConfigContextLoader.class)
 @Transactional
-@Rollback(true)	//Cambiar a false si no queres que se autoborre cuando corre tests
+@Rollback(true)
 public class VaxServiceTestCase {
 	private Date dob;
 
@@ -160,4 +160,3 @@ public class VaxServiceTestCase {
 	}
 
 }
-**/
