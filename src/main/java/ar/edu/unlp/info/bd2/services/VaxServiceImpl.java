@@ -260,4 +260,12 @@ public class VaxServiceImpl implements VaxService{
     public String getLessEmployeesSupportStaffArea() {return vax_repo.getLessEmployeesSupportStaffArea();}
 
     public List<Employee> getStaffWithName(String name){return vax_repo.getStaffWithName(name);}
+
+    public List<Vaccine> getUnappliedVaccines() {
+        return vax_repo.getUnappliedVaccines();
+    }
+
+    public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
+        return vax_repo.getShotCertificatesBetweenDates(startDate,endDate);
+    }
 }

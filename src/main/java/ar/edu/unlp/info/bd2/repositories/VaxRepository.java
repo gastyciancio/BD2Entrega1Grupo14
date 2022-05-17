@@ -76,7 +76,7 @@ public class VaxRepository  {
 
     public Shot saveShot(Shot newShot) throws VaxException {
         try {
-            ShotCertificate newCertificate = createCertificate();
+            ShotCertificate newCertificate = createCertificate(newShot.getDate());
             sessionFactory.getCurrentSession().save(newCertificate);
 
             newShot.setShotCertificate(newCertificate);
@@ -103,9 +103,9 @@ public class VaxRepository  {
         sessionFactory.getCurrentSession().update(patient);
     }
 
-    public ShotCertificate createCertificate(){
+    public ShotCertificate createCertificate(Date date){
         Random r = new Random();
-        ShotCertificate newCertificate = new ShotCertificate(DateTime.now().toDate(),r.nextInt(Integer.MAX_VALUE));
+        ShotCertificate newCertificate = new ShotCertificate(date,r.nextInt(Integer.MAX_VALUE));
         return newCertificate;
     }
 
@@ -249,6 +249,17 @@ public class VaxRepository  {
     public List<Employee> getStaffWithName(String name){
         String query = "FROM Employee e WHERE e.fullname LIKE :name";
         return (List<Employee>) sessionFactory.getCurrentSession().createQuery(query).setParameter("name",'%'+name+'%').list();
+    }
+
+    public List<Vaccine> getUnappliedVaccines() {
+        String query = "FROM Vaccine v WHERE v.id NOT IN (SELECT s.vaccine.id FROM Shot s)";
+        return (List<Vaccine>) sessionFactory.getCurrentSession().createQuery(query).list();
+    }
+
+    public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
+        String query = "FROM ShotCertificate sc WHERE date BETWEEN :startDate AND :endDate";
+        return (List<ShotCertificate>) sessionFactory.getCurrentSession().createQuery(query).setParameter("startDate",startDate).setParameter("endDate",endDate).list();
+
     }
 
 }

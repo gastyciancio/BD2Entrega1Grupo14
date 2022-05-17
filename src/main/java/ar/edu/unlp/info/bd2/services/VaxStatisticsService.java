@@ -45,11 +45,11 @@ public interface VaxStatisticsService {
 	/**
 	 * @return Una lista de las vacunas de las que no se aplicaron dosis
 	 */
-	/**List<Vaccine> getUnappliedVaccines();**/
+	List<Vaccine> getUnappliedVaccines();
 	
 	/**
 	 * @return Una lista de los certificados emitidos en un rango de fechas
 	 */
-	/**List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate);**/
+	List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate);
 
 }
