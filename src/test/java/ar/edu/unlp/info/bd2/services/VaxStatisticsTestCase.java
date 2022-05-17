@@ -95,7 +95,7 @@ public class VaxStatisticsTestCase {
     	assertEquals("46768509",nurses.get(0).getDni());
     	assertEquals(Integer.valueOf(10),nurses.get(0).getExperience());
     }
-    /**
+
     @Test
     public void testGetLessEmployeesSupportStaffArea() {
     	String area = this.service.getLessEmployeesSupportStaffArea();

@@ -232,13 +232,23 @@ public class VaxRepository  {
     }
 
     public Centre getTopShotCentre() {
-        String query = "Select s.centre from Shot as s group by s.centre order by count(*) desc";
+        String query = "SELECT s.centre FROM Shot as s GROUP BY s.centre ORDER BY COUNT(*) DESC";
         return (Centre) sessionFactory.getCurrentSession().createQuery(query).setMaxResults(1).uniqueResult();
     }
 
     public List<Nurse> getNurseNotShot() {
         String query = "FROM Nurse n WHERE n.id NOT IN (SELECT s.nurse.id FROM Shot s)";
         return (List<Nurse>) sessionFactory.getCurrentSession().createQuery(query).list();
+    }
+
+    public String getLessEmployeesSupportStaffArea(){
+        String query = "SELECT area FROM SupportStaff s GROUP BY s.area ORDER BY COUNT(*) ASC";
+        return (String) sessionFactory.getCurrentSession().createQuery(query).setMaxResults(1).uniqueResult();
+    }
+
+    public List<Employee> getStaffWithName(String name){
+        String query = "FROM Employee e WHERE e.fullname LIKE :name";
+        return (List<Employee>) sessionFactory.getCurrentSession().createQuery(query).setParameter("name",'%'+name+'%').list();
     }
 
 }
