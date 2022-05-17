@@ -7,7 +7,6 @@ import ar.edu.unlp.info.bd2.util.DBInitializer;
 import ar.edu.unlp.info.bd2.model.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;

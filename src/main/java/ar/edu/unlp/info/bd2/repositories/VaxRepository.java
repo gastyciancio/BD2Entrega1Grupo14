@@ -3,7 +3,6 @@ package ar.edu.unlp.info.bd2.repositories;
 import ar.edu.unlp.info.bd2.model.*;
 import org.hibernate.SessionFactory;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -212,6 +211,11 @@ public class VaxRepository  {
         catch (PersistenceException e) {
             throw new VaxException("Constraint Violation");
         }
+    }
+
+    public SupportStaff updateSupportStaff(SupportStaff supportStaff){
+        sessionFactory.getCurrentSession().update(supportStaff);
+        return getSupportStaffById(supportStaff.getId());
     }
 
     // -------------------------------------------------- Entrega2 ------------------------------------------------------

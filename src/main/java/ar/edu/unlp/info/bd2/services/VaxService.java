@@ -113,9 +113,9 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el staff
 	 * @throws VaxException 
 	 */
-	/**
+
 	SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
-	 **/
+
 
 
 	/**

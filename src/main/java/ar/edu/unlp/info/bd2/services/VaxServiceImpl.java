@@ -3,10 +3,7 @@ package ar.edu.unlp.info.bd2.services;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.PersistenceException;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -196,16 +193,18 @@ public class VaxServiceImpl implements VaxService{
         catch (VaxException e){
             throw e;
         }
-    };
+    }
 
     /**
      * @param staff el staff a actualizar
      * @return el staff
      * @throws VaxException
      */
-    /**
-    SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
-**/
+
+    public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException{
+        return this.vax_repo.updateSupportStaff(staff);
+    }
+
 
     /**
      * @param centre el centre a actualizar
