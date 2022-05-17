@@ -100,14 +100,14 @@ public class VaxStatisticsTestCase {
     public void testGetLessEmployeesSupportStaffArea() {
     	String area = this.service.getLessEmployeesSupportStaffArea();
     	assertEquals("Observaciones",area);
-    }**/
-    /**
+    }
+//DECIA List<Staff> Y EN REALIDAD ES List<Employee> SE CONFUNDIERON????? PREGUNTARRRRRRRR
     @Test
     public void testGetStaffWithName() {
-    	List<Staff> staffs = this.service.getStaffWithName("Hernández");
+    	List<Employee> staffs = this.service.getStaffWithName("Hernández");
     	assertEquals(3,staffs.size());
     	this.assertListEquality(staffs.stream().map(property -> property.getFullName()).collect(Collectors.toList()), Arrays.asList("Ceasar Hernández","Kasim Hernández","Modesty Hernández"));
-    }**/
+    }
 
     /**
     @Test
