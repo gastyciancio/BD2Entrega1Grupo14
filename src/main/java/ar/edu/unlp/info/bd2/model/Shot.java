@@ -63,6 +63,10 @@ public class Shot {
         return shotCertificate;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
     public void setShotCertificate(ShotCertificate shotCertificate) {
         this.shotCertificate = shotCertificate;
     }
