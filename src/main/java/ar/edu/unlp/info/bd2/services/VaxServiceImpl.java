@@ -258,7 +258,7 @@ public class VaxServiceImpl implements VaxService{
 
     public String getLessEmployeesSupportStaffArea() {return vax_repo.getLessEmployeesSupportStaffArea();}
 
-    public List<Employee> getStaffWithName(String name){return vax_repo.getStaffWithName(name);}
+    public List<Staff> getStaffWithName(String name){return vax_repo.getStaffWithName(name);}
 
     public List<Vaccine> getUnappliedVaccines() {
         return vax_repo.getUnappliedVaccines();
