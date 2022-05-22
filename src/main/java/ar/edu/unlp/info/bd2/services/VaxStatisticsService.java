@@ -40,7 +40,7 @@ public interface VaxStatisticsService {
 	/**
 	 * @return Los empleados cuyo fullName contenga <code>name</code>
 	 */
-	List<Employee> getStaffWithName(String name);
+	List<Staff> getStaffWithName(String name);
 	
 	/**
 	 * @return Una lista de las vacunas de las que no se aplicaron dosis

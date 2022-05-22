@@ -231,7 +231,7 @@ public class VaxRepository  {
     }
 
     public List<Centre> getCentresTopNStaff(int n) {
-        String query = "FROM Centre order by employees.size DESC";
+        String query = "FROM Centre order by staff.size DESC";
         return sessionFactory.getCurrentSession().createQuery(query).setMaxResults(n).list();
     }
 
@@ -250,9 +250,9 @@ public class VaxRepository  {
         return (String) sessionFactory.getCurrentSession().createQuery(query).setMaxResults(1).uniqueResult();
     }
 
-    public List<Employee> getStaffWithName(String name){
-        String query = "FROM Employee e WHERE e.fullname LIKE :name";
-        return (List<Employee>) sessionFactory.getCurrentSession().createQuery(query).setParameter("name",'%'+name+'%').list();
+    public List<Staff> getStaffWithName(String name){
+        String query = "FROM Staff e WHERE e.fullname LIKE :name";
+        return (List<Staff>) sessionFactory.getCurrentSession().createQuery(query).setParameter("name",'%'+name+'%').list();
     }
 
     public List<Vaccine> getUnappliedVaccines() {

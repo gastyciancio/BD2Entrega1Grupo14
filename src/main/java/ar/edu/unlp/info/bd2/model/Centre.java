@@ -15,11 +15,11 @@ public class Centre {
 
     @ManyToMany
     @JoinTable(
-            name = "centre_employee",
+            name = "centre_staff",
             joinColumns = @JoinColumn(name = "centre_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id")
+            inverseJoinColumns = @JoinColumn(name = "staff_id")
     )
-    private Collection<Employee> employees = new ArrayList<>();
+    private Collection<Staff> staff = new ArrayList<>();
 
     public Centre() {
     }
@@ -36,12 +36,12 @@ public class Centre {
         return name;
     }
 
-    public Collection<Employee> getStaffs() {
-        return employees;
+    public Collection<Staff> getStaffs() {
+        return staff;
     }
 
-    public void addStaff(Employee staff){
-        this.employees.add(staff);
+    public void addStaff(Staff staff){
+        this.staff.add(staff);
         staff.getCentres().add(this);
     }
 

@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Nurse extends Employee{
+public class Nurse extends Staff {
 
     @Id
     @GeneratedValue
