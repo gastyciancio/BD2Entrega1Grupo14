@@ -1,33 +1,23 @@
 package ar.edu.unlp.info.bd2.repositories;
 
 import ar.edu.unlp.info.bd2.model.*;
-import ar.edu.unlp.info.bd2.services.VaxService;
-import ar.edu.unlp.info.bd2.repositories.VaxException;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.PlatformTransactionManager;
-
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
-import java.util.Random;
-
-import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.stereotype.Repository;
+import java.util.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
+@Transactional
+@Repository
 public class VaxRepository  {
 
     @Autowired
     SessionFactory sessionFactory;
 
+//--------------------------------------- Entrega 1 -------------------------------------------------------------
     /**
      * Guardamos un paciente (patient) en la base de datos, usando el método getPatientById para
      * recuperar el id de este.
@@ -85,7 +75,7 @@ public class VaxRepository  {
 
     public Shot saveShot(Shot newShot) throws VaxException {
         try {
-            ShotCertificate newCertificate = createCertificate();
+            ShotCertificate newCertificate = createCertificate(newShot.getDate());
             sessionFactory.getCurrentSession().save(newCertificate);
 
             newShot.setShotCertificate(newCertificate);
@@ -112,9 +102,9 @@ public class VaxRepository  {
         sessionFactory.getCurrentSession().update(patient);
     }
 
-    public ShotCertificate createCertificate(){
+    public ShotCertificate createCertificate(Date date){
         Random r = new Random();
-        ShotCertificate newCertificate = new ShotCertificate(DateTime.now().toDate(),r.nextInt(Integer.MAX_VALUE));
+        ShotCertificate newCertificate = new ShotCertificate(date,r.nextInt(Integer.MAX_VALUE));
         return newCertificate;
     }
 
@@ -208,8 +198,72 @@ public class VaxRepository  {
         }
     }
 
-    public VaccinationSchedule getVaccinationScheduleById(long id) throws VaxException {
+    public VaccinationSchedule getVaccinationScheduleById(long id) throws VaxException{
         String query = "FROM VaccinationSchedule WHERE id = :idVS";  //HQL
         return (VaccinationSchedule) sessionFactory.getCurrentSession().createQuery(query).setParameter("idVS", id).uniqueResult();
     }
+
+    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException{
+        sessionFactory.getCurrentSession().update(vaccinationSchedule);
+        try {
+            return getVaccinationScheduleById(vaccinationSchedule.getId());
+        }
+        catch (PersistenceException e) {
+            throw new VaxException("Constraint Violation");
+        }
+    }
+
+    public SupportStaff updateSupportStaff(SupportStaff supportStaff){
+        sessionFactory.getCurrentSession().update(supportStaff);
+        return getSupportStaffById(supportStaff.getId());
+    }
+
+    // -------------------------------------------------- Entrega2 ------------------------------------------------------
+
+    public List<Patient> getAllPatients() {
+        String query = "FROM Patient";  //HQL
+        return  sessionFactory.getCurrentSession().createQuery(query).list();
+    }
+
+    public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
+        String query = "FROM Nurse WHERE experience > :years";  //HQL
+        return  sessionFactory.getCurrentSession().createQuery(query).setParameter("years", years).list();
+    }
+
+    public List<Centre> getCentresTopNStaff(int n) {
+        String query = "FROM Centre order by staff.size DESC";
+        return sessionFactory.getCurrentSession().createQuery(query).setMaxResults(n).list();
+    }
+
+    public Centre getTopShotCentre() {
+        String query = "SELECT s.centre FROM Shot as s GROUP BY s.centre ORDER BY COUNT(*) DESC";
+        return (Centre) sessionFactory.getCurrentSession().createQuery(query).setMaxResults(1).uniqueResult();
+    }
+
+    public List<Nurse> getNurseNotShot() {
+        String query = "FROM Nurse n WHERE n.id NOT IN (SELECT s.nurse.id FROM Shot s)";
+        return (List<Nurse>) sessionFactory.getCurrentSession().createQuery(query).list();
+    }
+
+    public String getLessEmployeesSupportStaffArea(){
+        String query = "SELECT area FROM SupportStaff s GROUP BY s.area ORDER BY COUNT(*) ASC";
+        return (String) sessionFactory.getCurrentSession().createQuery(query).setMaxResults(1).uniqueResult();
+    }
+
+    public List<Staff> getStaffWithName(String name){
+        String query = "FROM Staff e WHERE e.fullname LIKE :name";
+        return (List<Staff>) sessionFactory.getCurrentSession().createQuery(query).setParameter("name",'%'+name+'%').list();
+    }
+
+    public List<Vaccine> getUnappliedVaccines() {
+        String query = "FROM Vaccine v WHERE v.id NOT IN (SELECT s.vaccine.id FROM Shot s)";
+        return (List<Vaccine>) sessionFactory.getCurrentSession().createQuery(query).list();
+    }
+
+    public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
+        String query = "FROM ShotCertificate sc WHERE date BETWEEN :startDate AND :endDate";
+        return (List<ShotCertificate>) sessionFactory.getCurrentSession().createQuery(query).setParameter("startDate",startDate).setParameter("endDate",endDate).list();
+
+    }
+
 }

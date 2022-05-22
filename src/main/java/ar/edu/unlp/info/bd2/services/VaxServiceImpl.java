@@ -3,11 +3,9 @@ package ar.edu.unlp.info.bd2.services;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.PersistenceException;
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public class VaxServiceImpl implements VaxService{
@@ -16,7 +14,7 @@ public class VaxServiceImpl implements VaxService{
     public VaxServiceImpl(VaxRepository repo){
         this.vax_repo=repo;
     }
-
+//--------------------------------------------- Entrega 1 -----------------------------------------------------
     /**
      *
      * @param email email del usuario con el cual ingresa al sitio
@@ -195,16 +193,18 @@ public class VaxServiceImpl implements VaxService{
         catch (VaxException e){
             throw e;
         }
-    };
+    }
 
     /**
      * @param staff el staff a actualizar
      * @return el staff
      * @throws VaxException
      */
-    /**
-    SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
-**/
+
+    public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException{
+        return this.vax_repo.updateSupportStaff(staff);
+    }
+
 
     /**
      * @param centre el centre a actualizar
@@ -224,4 +224,47 @@ public class VaxServiceImpl implements VaxService{
         return vax_repo.getSupportStaffByDni(dni);
     };
 
+    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
+        try {
+            return vax_repo.updateVaccinationSchedule(vaccinationSchedule);
+        }
+        catch (VaxException e) {
+            throw e;
+        }
+    }
+
+    // -------------------------------------------------- Entrega2 ------------------------------------------------------
+
+
+    public List<Patient> getAllPatients(){
+        return vax_repo.getAllPatients();
+    }
+
+    public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
+        return vax_repo.getNurseWithMoreThanNYearsExperience(years);
+    }
+
+    public List<Centre> getCentresTopNStaff(int n) {
+        return vax_repo.getCentresTopNStaff(n);
+    }
+
+    public Centre getTopShotCentre() {
+        return vax_repo.getTopShotCentre();
+    }
+
+    public List<Nurse> getNurseNotShot() {
+        return vax_repo.getNurseNotShot();
+    }
+
+    public String getLessEmployeesSupportStaffArea() {return vax_repo.getLessEmployeesSupportStaffArea();}
+
+    public List<Staff> getStaffWithName(String name){return vax_repo.getStaffWithName(name);}
+
+    public List<Vaccine> getUnappliedVaccines() {
+        return vax_repo.getUnappliedVaccines();
+    }
+
+    public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
+        return vax_repo.getShotCertificatesBetweenDates(startDate,endDate);
+    }
 }

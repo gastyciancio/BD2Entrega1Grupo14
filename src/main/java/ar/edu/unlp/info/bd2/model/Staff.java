@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-public class Employee {
+public class Staff {
 
     @Id
     @GeneratedValue
@@ -16,13 +16,13 @@ public class Employee {
     @Column(unique = true)
     private String dni;
 
-    @ManyToMany(mappedBy = "employees")
+    @ManyToMany(mappedBy = "staff")
     private Collection<Centre> centres = new ArrayList<>();
 
-    public Employee() {
+    public Staff() {
     }
 
-    public Employee(String fullname, String dni) {
+    public Staff(String fullname, String dni) {
         this.fullname = fullname;
         this.dni = dni;
     }

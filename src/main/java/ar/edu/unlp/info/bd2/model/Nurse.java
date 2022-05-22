@@ -3,11 +3,9 @@ package ar.edu.unlp.info.bd2.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.Collection;
 
 @Entity
-public class Nurse extends Employee{
+public class Nurse extends Staff {
 
     @Id
     @GeneratedValue
@@ -22,5 +20,9 @@ public class Nurse extends Employee{
 
     public Nurse() {
 
+    }
+
+    public Integer getExperience() {
+        return experience;
     }
 }
