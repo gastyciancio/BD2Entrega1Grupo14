@@ -27,5 +27,6 @@ public class VaccinationSchedule {
 
     public void addVaccine(Vaccine v){
         this.vaccines.add(v);
+        v.getVaccinationSchedules().add(this);
     }
 }

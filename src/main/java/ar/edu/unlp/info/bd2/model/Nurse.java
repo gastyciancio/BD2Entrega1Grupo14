@@ -1,9 +1,8 @@
 package ar.edu.unlp.info.bd2.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Nurse extends Staff {
@@ -18,6 +17,9 @@ public class Nurse extends Staff {
         super(fullname, dni);
         this.experience = experience;
     }
+
+    @OneToMany(mappedBy = "nurse")
+    private List<Shot> shots = new ArrayList<Shot>();
 
     public Nurse() {
 

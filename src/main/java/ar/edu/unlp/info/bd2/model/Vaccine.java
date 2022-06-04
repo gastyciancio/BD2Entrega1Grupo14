@@ -3,6 +3,7 @@ package ar.edu.unlp.info.bd2.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Vaccine {
@@ -13,6 +14,9 @@ public class Vaccine {
 
         @Column(unique=true)
         private String name;
+
+        @OneToMany(mappedBy = "vaccine")
+        private List<Shot> shots = new ArrayList<Shot>();
 
         @ManyToMany
         @JoinTable(

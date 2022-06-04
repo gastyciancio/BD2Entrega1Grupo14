@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Staff {
 
     @Id

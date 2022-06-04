@@ -13,15 +13,15 @@ public class Shot {
     @ManyToOne
     private Patient patient;
 
-    @OneToOne()
+    @ManyToOne
     private Vaccine vaccine;
 
     private Date date;
 
-    @OneToOne
+    @ManyToOne
     private Centre centre;
 
-    @OneToOne
+    @ManyToOne
     private Nurse nurse;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -3,6 +3,7 @@ package ar.edu.unlp.info.bd2.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Centre {
@@ -20,6 +21,9 @@ public class Centre {
             inverseJoinColumns = @JoinColumn(name = "staff_id")
     )
     private Collection<Staff> staff = new ArrayList<>();
+
+    @OneToMany(mappedBy = "centre")
+    private List<Shot> shots = new ArrayList<Shot>();
 
     public Centre() {
     }
