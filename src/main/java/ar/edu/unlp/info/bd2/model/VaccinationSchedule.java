@@ -1,9 +1,6 @@
 package ar.edu.unlp.info.bd2.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +8,7 @@ import java.util.List;
 public class VaccinationSchedule {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToMany(mappedBy = "vaccination_schedules")

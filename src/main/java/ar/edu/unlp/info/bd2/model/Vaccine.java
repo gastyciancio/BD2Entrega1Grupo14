@@ -8,7 +8,7 @@ import java.util.Collection;
 public class Vaccine {
 
         @Id
-        @GeneratedValue
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
 
         @Column(unique=true)
