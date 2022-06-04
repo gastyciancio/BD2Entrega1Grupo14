@@ -11,7 +11,7 @@ public class VaccinationSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany(mappedBy = "vaccination_schedules")
+    @ManyToMany(mappedBy = "vaccinationSchedules")
     private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {

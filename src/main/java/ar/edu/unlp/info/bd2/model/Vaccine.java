@@ -18,8 +18,9 @@ public class Vaccine {
         @JoinTable(
                 name = "vaccine_vaccination_schedule",
                 joinColumns = @JoinColumn(name = "vaccine_id"),
-                inverseJoinColumns = @JoinColumn(name = "vaccination_schedule_id"))
-        private Collection<VaccinationSchedule> vaccination_schedules = new ArrayList<>();
+                inverseJoinColumns = @JoinColumn(name = "vaccination_schedule_id")
+        )
+        private Collection<VaccinationSchedule> vaccinationSchedules = new ArrayList<>();
 
         public Vaccine() {
         }
@@ -34,5 +35,9 @@ public class Vaccine {
 
         public String getName() {
                 return name;
+        }
+
+        public Collection<VaccinationSchedule> getVaccinationSchedules() {
+                return vaccinationSchedules;
         }
 }
