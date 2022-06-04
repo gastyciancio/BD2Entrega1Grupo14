@@ -7,7 +7,7 @@ import java.util.Date;
 public class Shot {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne

@@ -8,7 +8,7 @@ import java.util.Collection;
 public class Staff {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String fullname;
