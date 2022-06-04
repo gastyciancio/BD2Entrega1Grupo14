@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-public class Staff {
+public abstract class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
