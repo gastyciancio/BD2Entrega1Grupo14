@@ -1,10 +1,10 @@
 CREATE schema `grupo14`;
 CREATE USER grupo14 identified with mysql_native_password by 'pa$$word';
-GRANT ALTER ON *.* to 'grupo14'@'%' WITH GRANT OPTION;
-GRANT CREATE ON *.* to 'grupo14'@'%' WITH GRANT OPTION;
-GRANT DELETE ON *.* to 'grupo14'@'%' WITH GRANT OPTION;
-GRANT DROP ON *.* to 'grupo14'@'%' WITH GRANT OPTION;
-GRANT INSERT ON *.* to 'grupo14'@'%' WITH GRANT OPTION;
-GRANT SELECT ON *.* to 'grupo14'@'%' WITH GRANT OPTION;
-GRANT UPDATE ON *.* to 'grupo14'@'%' WITH GRANT OPTION;
+GRANT ALTER ON grupo14.* to 'grupo14'@'%';
+GRANT CREATE ON grupo14.* to 'grupo14'@'%';
+GRANT DELETE ON grupo14.* to 'grupo14'@'%';
+GRANT DROP ON grupo14.* to 'grupo14'@'%';
+GRANT INSERT ON grupo14.* to 'grupo14'@'%';
+GRANT SELECT ON grupo14.* to 'grupo14'@'%';
+GRANT UPDATE ON grupo14.* to 'grupo14'@'%';
 FLUSH PRIVILEGES;
