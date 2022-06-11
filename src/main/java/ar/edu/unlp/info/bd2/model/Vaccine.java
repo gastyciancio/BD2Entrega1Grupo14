@@ -18,12 +18,7 @@ public class Vaccine {
         @OneToMany(mappedBy = "vaccine")
         private List<Shot> shots = new ArrayList<Shot>();
 
-        @ManyToMany
-        @JoinTable(
-                name = "vaccine_vaccination_schedule",
-                joinColumns = @JoinColumn(name = "vaccine_id"),
-                inverseJoinColumns = @JoinColumn(name = "vaccination_schedule_id")
-        )
+        @ManyToMany(mappedBy = "vaccines")
         private Collection<VaccinationSchedule> vaccinationSchedules = new ArrayList<>();
 
         public Vaccine() {

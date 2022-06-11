@@ -2,6 +2,7 @@ package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,13 @@ public class VaccinationSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany(mappedBy = "vaccinationSchedules")
+    @ManyToMany
+    @OrderColumn(name = "unOrden", nullable = false)
+    @JoinTable(
+            name = "vaccine_vaccination_schedule",
+            joinColumns = @JoinColumn(name = "vaccination_schedule_id"),
+            inverseJoinColumns = @JoinColumn(name = "vaccine_id")
+    )
     private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {
