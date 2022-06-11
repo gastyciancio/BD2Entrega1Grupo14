@@ -7,21 +7,21 @@ import java.util.Date;
 public class Shot {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
     private Patient patient;
 
-    @OneToOne()
+    @ManyToOne
     private Vaccine vaccine;
 
     private Date date;
 
-    @OneToOne
+    @ManyToOne
     private Centre centre;
 
-    @OneToOne
+    @ManyToOne
     private Nurse nurse;
 
     @OneToOne(cascade = CascadeType.ALL)
