@@ -1,0 +1,141 @@
+﻿Parte 2: Primeros pasos con MongoDB
+
+5. 
+
+Crear una nueva base de datos llamada vaccination:
+* use vaccination
+
+
+Crear la colección nurses:
+* db.createCollection("nurses")
+
+
+Insertar una enfermera en la colección:
+* db.nurses.insertOne({name:"Morella Crespo", experience:9})
+
+
+Recuperar la información de la enfermera:
+* db.nurses.find().pretty()
+
+
+6. 
+
+* db.nurses.insertMany([{name:'Gale Molina', experience:8, vaccines:['AZ','Moderna']},{name:'Honoria Fernandez', experience:5, vaccines:['Pfizer','Moderna','Sputnik V']},{name:'Gonzalo Gallardo',experience:3},{name:'Altea Parra',experience:6,vaccines:['Pfizer']}])
+
+Y busque los enfermeros:
+De 5 años de experiencia o menos:
+* db.nurses.find({ experience: {$lte: 5} })
+
+
+Que hayan aplicado la vacuna “Pfizer”:
+* db.nurses.find({vaccines: "Pfizer"})
+
+
+Que no hayan aplicado vacunas (es decir, que el atributo vaccines esté ausente)
+* db.nurses.find({vaccines: {$exists : false}})
+
+
+De apellido ‘Fernández’ 
+* db.nurses.find({name:/Fernandez$/} )
+
+
+Con 6 o más años de experiencia y que hayan aplicado la vacuna ‘Moderna’
+* db.nurses.find({experience:{$gte:6},vaccines:'Moderna'})
+
+
+vuelva a realizar la última consulta pero proyecte sólo el nombre del enfermero/a en los resultados, omitiendo incluso el atributo _id de la proyección. 
+db.nurses.find({experience:{$gte:6},vaccines:'Moderna'},{"name":1,_id:0})
+
+
+7. Actualice a “Gale Molina” cambiándole la experiencia a 9 años. 
+db.nurses.updateOne({name: "Gale Molina"}, {$set: {experience: 9}})
+
+
+8. Cree el array de vacunas (vaccines) para ”Gonzalo Gallardo". 
+db.nurses.updateOne({name: 'Gonzalo Gallardo'},{$set: {vaccines:[]}})
+
+
+9. Agregue “AZ” a las vacunas de “Altea Parra”. 
+db.nurses.updateOne({name: 'Altea Parra'},{$addToSet: {vaccines:'AZ'}})
+
+
+10. Duplique la experiencia de todos los enfermeros que hayan aplicado la vacuna “Pfizer”
+db.nurses.updateMany({vaccines: 'Pfizer'},{$mul: {experience:2}})
+
+
+
+Parte 3: Índices
+
+Eliminar a todos los enfermeros de la colección:
+* db.nurses.deleteMany({})
+
+
+Guarde en un archivo llamado ‘generador.js’ el siguiente código JavaScript y ejecútelo con: load():
+* load("<ruta>/generador.js")
+
+
+11. 
+Obtener los índices de la colección doses:
+* db.doses.getIndexes()
+
+
+12. 
+Crear el índice para el campo nurse de la colección doses:
+* db.doses.createIndex({nurse:1})
+
+Busque las dosis que tengan en el nombre del enfermero el string “11” y utilice el método explain("executionStats"):
+* db.doses.find({nurse:/11/}).explain("executionStats")
+
+
+Para borrar el índice se usa db.doses.dropIndex({nurse:1})
+
+
+13. 
+
+Creamos el índice pedido:
+
+
+-        db.patients.createIndex({address: "2dsphere" })
+
+
+Nos guardamos en una variable el multipoligono con las coordenadas de BsAs
+
+
+-         var ubicaciones ={type: "MultiPolygon", coordinates: [[[[-58.46305847167969,-34.53456089748654],[-58.49979400634765,-34.54983198845187],[-58.532066345214844,-34.614561581608186],[-58.528633117675774,-34.6538270014492],[-58.48674774169922,-34.68742794931483],[-58.479881286621094,-34.68206400648744],[-58.46855163574218,-34.65297974261105],[-58.465118408203125,-34.64733112904415],[-58.4585952758789,-34.63998735602951],[-58.45344543457032,-34.63603274732642],[-58.447265625,-34.63575026806082],[-58.438339233398445,-34.63038297923296],[-58.38100433349609,-34.62162507826766],[-58.38237762451171,-34.59251960889388],[-58.378944396972656,-34.5843230246475],[-58.46305847167969,-34.53456089748654]]]]}
+
+
+Realizamos la búsqueda de los paciente que vivan en BsAs:
+
+
+-        db.patients.find({address: {$geoIntersects: {$geometry: ubicaciones}}}).explain("executionStats")
+
+
+Para borrar el índice se usa db.patients.dropIndex({address: "2dsphere" })
+
+
+
+Parte 4: Aggregation Framework
+
+14. Obtenga 5 pacientes aleatorios de la colección. 
+
+db.patients.aggregate([{$sample: {size: 5}}])
+
+
+15. 
+
+Como en el punto 13) eliminamos el índice para hacer las pruebas que pedía, para este punto se debe volver a crear:
+* db.patients.createIndex({address: "2dsphere" })
+
+
+db.patients.aggregate([{$geoNear: {near:{type: "Point",coordinates:[-58.4586,-34.5968]},maxDistance: 1000,distanceField: "distanceField"}},{ $out:"patientsBsAs"}])
+
+
+16. Obtenga una colección de las dosis aplicadas a los pacientes del punto anterior. Note que sólo es posible ligarlas por el nombre del paciente. 
+Si la consulta se empieza a tornar difícil de leer, se pueden ir guardando los agregadores en variables, que no son más que objetos en formato JSON.
+
+db.doses.aggregate([ {$lookup: {from:"patientsBsAs", localField:"patient", foreignField:"name", as: "array"}}, {$match: {"array": {$ne:[]}}}, {$project: {"nurse": 1, "patient": 1, "vaccine": 1, "date": 1}},{$out: "dosesPatientsBsAs"} ])
+
+
+17. Obtenga una nueva colección de nurses, cuyos nombres incluyan el string “111”. En cada documento (cada nurse) se debe agregar un atributo doses que consista en un array con todas las dosis que aplicó después del 1/5/2021
+
+db.nurses.aggregate([{$match:{name:/111/}},{$lookup:{from:"doses",localField:"name",foreignField:"nurse",as:"doses"}} , {$project: {name:1,experience:1,tags:1,doses: {$filter: {input: "$doses", as: "dose", cond:{$gte: ["$$dose.date", new ISODate("2021-05-01T00:00:00Z")]}} }}}, {$out:"nursesWithDoses"}])
