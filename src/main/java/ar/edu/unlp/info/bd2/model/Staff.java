@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-public class Staff {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Staff {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String fullname;

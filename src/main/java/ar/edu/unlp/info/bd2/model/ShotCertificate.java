@@ -7,7 +7,7 @@ import java.util.Date;
 public class ShotCertificate {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private Date date;
