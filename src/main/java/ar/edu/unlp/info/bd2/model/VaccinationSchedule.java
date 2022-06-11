@@ -13,7 +13,7 @@ public class VaccinationSchedule {
     private long id;
 
     @ManyToMany
-    @OrderColumn(name = "unOrden", nullable = false)
+    @OrderColumn(name = "orden", nullable = false)
     @JoinTable(
             name = "vaccine_vaccination_schedule",
             joinColumns = @JoinColumn(name = "vaccination_schedule_id"),
