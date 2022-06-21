@@ -1,13 +1,13 @@
 package ar.edu.unlp.info.bd2.services;
 
-import ar.edu.unlp.info.bd2.config.AppConfig;
-import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
+import ar.edu.unlp.info.bd2.config.SpringDataConfiguration;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -20,14 +20,17 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {AppConfig.class, HibernateConfiguration.class}, loader = AnnotationConfigContextLoader.class)
 @Transactional
 @Rollback(true)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(
+        classes = {SpringDataConfiguration.class},
+        loader = AnnotationConfigContextLoader.class)
 public class VaxServiceTestCase {
 	private Date dob;
 
     @Autowired
+    @Qualifier("springDataJpaService")
     VaxService service;
 
 	@BeforeEach
@@ -40,22 +43,22 @@ public class VaxServiceTestCase {
 	}
 
     @Test
-    public void testCreatePatient() throws VaxException {
+    public void testCreatePatient() throws VaxException{
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
-		assertNotNull(fede.getId());
-		assertEquals("Federico Orlando", fede.getFullname());
-		Optional<Patient> us = this.service.getPatientByEmail("federico.orlando@info.unlp.edu.ar");
-		if (!us.isPresent()) {
+    	assertNotNull (fede.getId());
+    	assertEquals("Federico Orlando", fede.getFullname());
+    	Optional<Patient> us = this.service.getPatientByEmail("federico.orlando@info.unlp.edu.ar");
+    	if (!us.isPresent()) {
 			throw new VaxException("Patient doesn't exist");
 		}
 		Patient user = us.get();
-		assertNotNull(user.getId());
-		assertEquals("Federico Orlando", user.getFullname());
-		assertEquals(dob, user.getDayOfBirth());
-		assertEquals("pas$w0rd", user.getPassword());
-		VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
-		assertEquals("Constraint Violation", ex.getMessage());
-	}
+		assertNotNull (user.getId());
+    	assertEquals("Federico Orlando",user.getFullname());
+    	assertEquals(dob, user.getDayOfBirth());
+    	assertEquals("pas$w0rd", user.getPassword());
+    	VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
+    	assertEquals("Constraint Violation",ex.getMessage());
+    }
 
 	@Test
 	public void testCreateVaccine() throws VaxException{
@@ -88,6 +91,7 @@ public class VaxServiceTestCase {
 		assertTrue(fede.getShots().contains(shot));
 		assertNotNull(shot.getShotCertificate());
 		assertNotNull(shot.getShotCertificate().getSerialNumber());
+		
 	}
 
 	@Test
@@ -104,7 +108,6 @@ public class VaxServiceTestCase {
 		assertTrue(fabian.getCentres().contains(calle2));
 	}
 
-
 	@Test
 	public void testCreateSupportStaff() throws VaxException{
 		Centre h = this.service.createCentre("Hospital Italiano");
@@ -120,8 +123,8 @@ public class VaxServiceTestCase {
 		assertEquals(1,AnaSaved.getCentres().size());
 		assertEquals(1,italiano.getStaffs().size());
 		assertTrue(italiano.getStaffs().contains(AnaSaved));
+		
 	}
-
 
 	@Test
 	public void testVaccinationSchedule() throws VaxException{
@@ -139,7 +142,6 @@ public class VaxServiceTestCase {
 		shortSchedule.addVaccine(az);
 
 		try {
-			//Si nunca le hizo update a schedule por que tiene las vacunas?
 			VaccinationSchedule savedSchedule = this.service.getVaccinationScheduleById(schedule.getId());
 			assertNotNull (savedSchedule.getId());
 			assertTrue(savedSchedule.getVaccines().contains(az));
@@ -157,6 +159,7 @@ public class VaxServiceTestCase {
 		catch (Exception e) {
 			throw new VaxException("Schedule doesn't exists");
 		}
+
 	}
 
 }

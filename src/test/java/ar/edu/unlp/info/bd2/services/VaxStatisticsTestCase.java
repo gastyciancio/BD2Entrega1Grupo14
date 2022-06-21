@@ -1,8 +1,7 @@
 package ar.edu.unlp.info.bd2.services;
 
-import ar.edu.unlp.info.bd2.config.AppConfig;
 import ar.edu.unlp.info.bd2.config.DBInitializerConfig;
-import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
+import ar.edu.unlp.info.bd2.config.SpringDataConfiguration;
 import ar.edu.unlp.info.bd2.util.DBInitializer;
 import ar.edu.unlp.info.bd2.model.*;
 import org.junit.Assert;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -24,10 +24,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {AppConfig.class, HibernateConfiguration.class, DBInitializerConfig.class }, loader = AnnotationConfigContextLoader.class)
+
 @Transactional
 @Rollback(true)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(
+        classes = {SpringDataConfiguration.class},
+        loader = AnnotationConfigContextLoader.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 
 public class VaxStatisticsTestCase {
@@ -35,10 +38,10 @@ public class VaxStatisticsTestCase {
     DBInitializer initializer;
 
     @Autowired
+    @Qualifier("springDataJpaService")
     VaxService service;
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
 
     @BeforeAll
     public void prepareDB() throws Exception {
@@ -59,34 +62,32 @@ public class VaxStatisticsTestCase {
           }
         }
       }
-
+    
     @Test
     public void testGetAllPatients() {
     	assertEquals(322,this.service.getAllPatients().size());
     }
-
+    
     @Test
     public void testGetNurseWithMoreThanNYearsExperience() {
     	List<Nurse> nurses =this.service.getNurseWithMoreThanNYearsExperience(9); 
     	assertEquals(4,nurses.size());
     	this.assertListEquality(nurses.stream().map(property -> property.getFullName()).collect(Collectors.toList()),Arrays.asList("Arneris Ibáñez","Emir Vidal","Cornelio Sánchez","Kristin Vega"));
     }
-
+    
     @Test
-    public void testGetCentresTopNStaff() throws Exception {
+    public void testGetCentresTopNStaff() {
     	List<Centre> centres = this.service.getCentresTopNStaff(5);
     	assertEquals(5,centres.size());
-
     	this.assertListEquality(centres.stream().map(property -> property.getName()).collect(Collectors.toList()), Arrays.asList("Hospital San Juan de Dios","SADOP","PAMI","ATE","Abasto"));
     }
-
-
+    
     @Test
     public void testGetTopShotCentre() {
     	Centre centre = this.service.getTopShotCentre();
     	assertEquals("Hospital de Romero",centre.getName());
     }
-
+    
     @Test
     public void testGetNurseNotShot() {
     	List<Nurse> nurses = this.service.getNurseNotShot();
@@ -95,28 +96,27 @@ public class VaxStatisticsTestCase {
     	assertEquals("46768509",nurses.get(0).getDni());
     	assertEquals(Integer.valueOf(10),nurses.get(0).getExperience());
     }
-
+    
     @Test
     public void testGetLessEmployeesSupportStaffArea() {
     	String area = this.service.getLessEmployeesSupportStaffArea();
     	assertEquals("Observaciones",area);
     }
-
+    
     @Test
     public void testGetStaffWithName() {
     	List<Staff> staffs = this.service.getStaffWithName("Hernández");
     	assertEquals(3,staffs.size());
     	this.assertListEquality(staffs.stream().map(property -> property.getFullName()).collect(Collectors.toList()), Arrays.asList("Ceasar Hernández","Kasim Hernández","Modesty Hernández"));
     }
-
-
+    
     @Test
     public void testGetUnappliedVaccines() {
     	List<Vaccine> vaccines = this.service.getUnappliedVaccines();
     	assertEquals(1,vaccines.size());
     	assertEquals("Bharat",vaccines.get(0).getName());
     }
-
+    
     @Test
     public void testGetShotCertificatesBetweenDates() {
     	List<ShotCertificate> certificates;
@@ -127,6 +127,6 @@ public class VaxStatisticsTestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
     }
 }
