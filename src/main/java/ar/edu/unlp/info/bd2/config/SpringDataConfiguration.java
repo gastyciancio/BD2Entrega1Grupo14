@@ -3,7 +3,7 @@ package ar.edu.unlp.info.bd2.config;
 
 import ar.edu.unlp.info.bd2.services.VaxService;
 import ar.edu.unlp.info.bd2.services.SpringDataVaxService;
-import ar.edu.unlp.info.bd2.util.DBInitializer;
+import ar.edu.unlp.info.bd2.utils.DBInitializer;
 
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;

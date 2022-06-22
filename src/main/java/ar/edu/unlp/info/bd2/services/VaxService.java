@@ -124,7 +124,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param schedule
 	 * @return el VaccinationSchedule actualizado.
 	 */
-	VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule);
+	VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule) throws VaxException;
 
 	
 }
