@@ -210,13 +210,16 @@ public class SpringDataVaxService implements VaxService {
     }
 
     public List<Centre> getCentresTopNStaff(int n) {
-        Pageable pageable = PageRequest.of(1,n);
-        return centreRepository.getCentresTopNStaff();
+        Pageable pageable = PageRequest.of(0,n);
+        List<Centre> p =  centreRepository.getCentresTopNStaff(pageable);
+        return p;
     }
 
     public Centre getTopShotCentre(){
-        Pageable pageable = PageRequest.of(1,1);
-        return centreRepository.getTopShotCentre();
+        Pageable pageable = PageRequest.of(0,1);
+        List<Centre> p = centreRepository.getTopShotCentre(pageable);
+
+        return p.get(0);
     }
 
     public List<Nurse> getNurseNotShot() {
@@ -224,8 +227,9 @@ public class SpringDataVaxService implements VaxService {
     }
 
     public String getLessEmployeesSupportStaffArea() {
-        Pageable pageable = PageRequest.of(1,1);
-        return staffRepository.getLessEmployeesSupportStaffArea();
+        Pageable pageable = PageRequest.of(0,1);
+        List<String> p = staffRepository.getLessEmployeesSupportStaffArea(pageable);
+        return p.get(0);
     }
 
     public List<Staff> getStaffWithName(String name) {
