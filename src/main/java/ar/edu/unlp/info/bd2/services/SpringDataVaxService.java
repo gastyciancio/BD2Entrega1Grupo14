@@ -94,14 +94,12 @@ public class SpringDataVaxService implements VaxService {
         }
     }
 
-    //Helper de createShot. ESTA BIEN ACA?
     private ShotCertificate createCertificate(Date date){
         Random r = new Random();
         ShotCertificate newCertificate = new ShotCertificate(date,r.nextInt(Integer.MAX_VALUE));
         return newCertificate;
     }
 
-    //Helper de createShot. ESTA BIEN ACA?
     private Patient addShotToPatient(Shot newShot) {
         Patient patient = newShot.getPatient();
         patient.addShot(newShot);
@@ -206,7 +204,7 @@ public class SpringDataVaxService implements VaxService {
     }
 
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
-        return nurseRepository.getNurseWithMoreThanNYearsExperience(years);
+        return nurseRepository.findByExperienceGreaterThan(years);
     }
 
     public List<Centre> getCentresTopNStaff(int n) {
@@ -233,7 +231,7 @@ public class SpringDataVaxService implements VaxService {
     }
 
     public List<Staff> getStaffWithName(String name) {
-        return staffRepository.getStaffWithName(name);
+        return staffRepository.findByFullnameContaining(name);
     }
 
     public List<Vaccine> getUnappliedVaccines() {
@@ -241,6 +239,6 @@ public class SpringDataVaxService implements VaxService {
     }
 
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
-        return shotCertificateRepository.getShotCertificatesBetweenDates(startDate, endDate);
+        return shotCertificateRepository.findByDateBetween(startDate, endDate);
     }
 }

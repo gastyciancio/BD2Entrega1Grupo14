@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ShotCertificateRepository extends CrudRepository<ShotCertificate, Long> {
 
-    @Query("FROM ShotCertificate sc WHERE date BETWEEN ?1 AND ?2")
-    List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate);
-
+    //@Query("FROM ShotCertificate sc WHERE date BETWEEN ?1 AND ?2")
+    //List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate);
+    List<ShotCertificate> findByDateBetween(Date startDate, Date endDate);
 }
