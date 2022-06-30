@@ -194,7 +194,7 @@ public class SpringDataVaxService implements VaxService {
         return supportStaffRepository.findByDni(dni);
     }
 
-    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule) throws VaxException {
+    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule) {
        return vaccinationSchedulerRepository.save(schedule);
 
     }
