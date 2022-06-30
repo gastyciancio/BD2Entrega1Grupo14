@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface StaffRepository  extends CrudRepository<Staff, Long> {
 
-    //@Query("FROM Staff WHERE fullname LIKE CONCAT('%',?1,'%')")
-    //List<Staff> getStaffWithName(String name);
     List<Staff> findByFullnameContaining(String name);
 
     @Query("SELECT area FROM SupportStaff s GROUP BY s.area ORDER BY COUNT(*) ASC")

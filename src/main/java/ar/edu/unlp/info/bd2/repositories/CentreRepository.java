@@ -13,7 +13,6 @@ public interface CentreRepository extends CrudRepository<Centre, Long> {
 
     @Query("FROM Centre order by staff.size DESC")
     List<Centre> getCentresTopNStaff(Pageable pageable);
-    //
 
     @Query("SELECT s.centre FROM Shot as s GROUP BY s.centre ORDER BY COUNT(*) DESC")
     List<Centre> getTopShotCentre(Pageable pageable);

@@ -2,7 +2,6 @@ package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
