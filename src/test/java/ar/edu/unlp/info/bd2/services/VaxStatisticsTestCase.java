@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.bd2.services;
 
+import ar.edu.unlp.info.bd2.config.DBInitializerConfig;
 import ar.edu.unlp.info.bd2.config.SpringDataConfiguration;
 import ar.edu.unlp.info.bd2.utils.DBInitializer;
 import ar.edu.unlp.info.bd2.model.*;
